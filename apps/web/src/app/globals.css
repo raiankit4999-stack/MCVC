@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #2563eb;
+  --brand-accent: #172b4d;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body {
+  @apply bg-surface text-slate-800;
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+.hero-bg {
+  background:
+    radial-gradient(60% 80% at 75% 40%, rgba(124, 58, 237, 0.35), transparent 60%),
+    radial-gradient(50% 60% at 95% 70%, rgba(37, 99, 235, 0.35), transparent 60%),
+    linear-gradient(120deg, #0a1630 0%, #0f1f3d 55%, #172b4d 100%);
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+}
