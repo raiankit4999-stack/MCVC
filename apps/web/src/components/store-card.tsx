@@ -28,14 +28,16 @@ export function StoreCard({ store }: { store: S }) {
       {store.tagline && <p className="mt-3 line-clamp-2 text-sm text-slate-600">{store.tagline}</p>}
       <div className="mt-3 flex flex-wrap gap-1.5">
         {store.categories.slice(0, 3).map((c) => (
-          <Badge key={c.slug} tone={c.kind === 'SERVICE' ? 'violet' : 'blue'}>{c.name}</Badge>
+          <Badge key={c.slug} tone={c.kind === 'SERVICE' ? 'slate' : 'orange'}>{c.name}</Badge>
         ))}
         {store.categories.length > 3 && <Badge>+{store.categories.length - 3}</Badge>}
       </div>
       <div className="mt-auto flex items-center justify-between pt-4 text-xs">
-        <span className="flex items-center gap-1 font-medium text-slate-700">
-          <Icon name="star" className="h-4 w-4 fill-amber-400 text-amber-400" /> {store.rating.toFixed(1)} <span className="text-slate-400">({store.ratingCount})</span>
-        </span>
+        {store.ratingCount > 0 ? (
+          <span className="flex items-center gap-1 font-medium text-slate-700">
+            <Icon name="star" className="h-4 w-4 fill-amber-400 text-amber-400" /> {store.rating.toFixed(1)} <span className="text-slate-400">({store.ratingCount})</span>
+          </span>
+        ) : <span className="text-slate-400">New listing</span>}
         {store.isOpen !== null && <span className={store.isOpen ? 'font-medium text-success' : 'text-slate-400'}>{store.isOpen ? 'Open now' : 'Closed'}</span>}
       </div>
     </Link>

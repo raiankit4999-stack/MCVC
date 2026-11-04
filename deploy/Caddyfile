@@ -6,7 +6,7 @@
     }
 }
 
-pccommunity.in, www.pccommunity.in {
+canetwork.in, www.canetwork.in {
     reverse_proxy 127.0.0.1:3100
 }
 

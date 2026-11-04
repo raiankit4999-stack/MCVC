@@ -1,14 +1,19 @@
 /* Development seed: platform data + a fully populated demo store. Run: pnpm db:seed */
 import { PrismaClient } from '@prisma/client';
 import { hash } from '@node-rs/argon2';
+import { CAN_NADIAD_FIRMS } from '../src/seed/fitag';
 import { seedPlatform } from '../src/seed/platform';
 import { DEFAULT_STORE_ROLES } from '../src/tenancy/permissions';
 
 const prisma = new PrismaClient();
+if (process.env.NODE_ENV === 'production' && (process.env.SEED_PASSWORD ?? '').length < 12) {
+  throw new Error('Set SEED_PASSWORD (12+ characters) to load demo data on a server');
+}
 const DEMO_PASSWORD = process.env.SEED_PASSWORD ?? 'Password@123';
 
 async function main() {
-  const { community } = await seedPlatform(prisma, { adminEmail: 'admin@pccommunity.local', adminPassword: DEMO_PASSWORD });
+  const { community } = await seedPlatform(prisma, { adminEmail: process.env.ADMIN_EMAIL?.toLowerCase() ?? 'admin@can.local', adminPassword: process.env.ADMIN_PASSWORD ?? DEMO_PASSWORD });
+  await seedNadiadListings(community.id);
   if (await prisma.store.findUnique({ where: { slug: 'techworld' } })) {
     console.log('Demo data already present.');
     return;
@@ -30,7 +35,7 @@ async function main() {
           create: {
             tagline: 'Your local computer partner', heroHeadline: 'Laptops • Desktops • Repair & IT Solutions',
             about: 'Buy, repair and upgrade — all in one place in Nadiad. Authorised partner for leading laptop brands with certified technicians.',
-            whatsappNumber: '+919825012345', primaryColor: '#2563EB', accentColor: '#172B4D',
+            whatsappNumber: '+919825012345', primaryColor: '#C2410C', accentColor: '#1C1917',
             businessHours: [1, 2, 3, 4, 5, 6].map((day) => ({ day, open: '10:00', close: '20:00' })),
           },
         },
@@ -72,7 +77,30 @@ async function main() {
       ],
     });
   });
-  console.log(`Seed complete.\n  Admin: admin@pccommunity.local / ${DEMO_PASSWORD}\n  Store owner: owner@techworld.local / ${DEMO_PASSWORD}\n  Store website: http://techworld.mcvc.localhost:3000`);
+  console.log(`Seed complete.\n  Admin: admin@can.local / ${DEMO_PASSWORD}\n  Store owner: owner@techworld.local / ${DEMO_PASSWORD}\n  Store website: http://techworld.mcvc.localhost:3000`);
+}
+
+/**
+ * Directory listings for the Computer Association of Nadiad member firms (names as published by FITAG).
+ * Demo only: no contact details, ratings or logins are created — the real owners claim and complete
+ * their listing through the normal membership flow.
+ */
+async function seedNadiadListings(communityId: string) {
+  const nadiad = await prisma.city.findFirstOrThrow({ where: { slug: 'nadiad' }, include: { areas: true } });
+  const laptops = await prisma.businessCategory.findMany({ where: { slug: { in: ['desktop-computers', 'laptops-and-notebooks', 'computer-accessories', 'laptop-repair', 'desktop-repair'] } } });
+  for (const [i, name] of CAN_NADIAD_FIRMS.entries()) {
+    const slug = `can-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
+    if (await prisma.store.findUnique({ where: { slug } })) continue;
+    const area = name.includes('Kheda') ? nadiad.areas.find((a) => a.slug === 'kheda') ?? nadiad.areas[0] : nadiad.areas[i % 3];
+    await prisma.store.create({
+      data: {
+        communityId, cityId: nadiad.id, areaId: area.id, name, slug, stateCode: '24', phone: '', email: '',
+        addressLine: `${area.name}, Nadiad, Gujarat`, websiteStatus: 'DRAFT',
+        categories: { create: laptops.map((c) => ({ categoryId: c.id })) },
+        settings: { create: { tagline: 'Member — Computer Association of Nadiad (CAN)' } },
+      },
+    });
+  }
 }
 
 main()

@@ -73,7 +73,7 @@ function Intake() {
         <fieldset>
           <legend className="mb-1.5 text-xs font-medium text-slate-700">Accessories received</legend>
           <div className="flex flex-wrap gap-2">
-            {ACCESSORIES.map((a) => { const on = acc.includes(a); return <button type="button" key={a} aria-pressed={on} onClick={() => setAcc((x) => (on ? x.filter((y) => y !== a) : [...x, a]))} className={cx('rounded-full px-3 py-1 text-xs font-medium ring-1 ring-inset', on ? 'bg-navy text-white ring-navy' : 'ring-slate-200')}>{a}</button>; })}
+            {ACCESSORIES.map((a) => { const on = acc.includes(a); return <button type="button" key={a} aria-pressed={on} onClick={() => setAcc((x) => (on ? x.filter((y) => y !== a) : [...x, a]))} className={cx('rounded-full px-3 py-1 text-xs font-medium ring-1 ring-inset', on ? 'bg-ink text-white ring-ink' : 'ring-slate-200')}>{a}</button>; })}
           </div>
         </fieldset>
         <p className="rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">Do not record device passwords or PINs. Ask the customer to sign in during diagnosis if needed.</p>

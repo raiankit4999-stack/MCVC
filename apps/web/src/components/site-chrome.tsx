@@ -1,18 +1,9 @@
 import Link from 'next/link';
-import { Icon } from './icons';
+import { CanLogo } from './brand';
 
-export function Logo({ dark = false, name = 'PC Community', sub = 'Computer Stores & IT Services Network' }: { dark?: boolean; name?: string; sub?: string }) {
-  return (
-    <Link href="/" className="flex items-center gap-2.5">
-      <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand text-white">
-        <Icon name="desktop" />
-      </span>
-      <span className="leading-tight">
-        <span className={`block text-[15px] font-bold ${dark ? 'text-white' : 'text-navy'}`}>{name}</span>
-        <span className={`block text-[10px] ${dark ? 'text-slate-300' : 'text-slate-500'}`}>{sub}</span>
-      </span>
-    </Link>
-  );
+/** Community logo lockup (CAN — Computer Association Network). */
+export function Logo({ dark = false }: { dark?: boolean }) {
+  return <CanLogo dark={dark} />;
 }
 
 export function CommunityNav() {
@@ -21,6 +12,7 @@ export function CommunityNav() {
     ['Stores', '/stores'],
     ['Repair & Services', '/stores?category=laptop-repair'],
     ['Cities', '/#cities'],
+    ['About', '/about'],
     ['Become a Member', '/join'],
   ];
   return (
@@ -49,12 +41,15 @@ export function CommunityNav() {
 
 export function CommunityFooter() {
   return (
-    <footer className="mt-20 bg-navy-950 text-slate-300">
+    <footer className="mt-20 bg-ink-950 text-slate-300">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <Logo dark />
+          <a href="https://fitag.in" target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-3 rounded-xl bg-white px-4 py-2.5" aria-label="FITAG — parent body (opens fitag.in)">
+            <img src="/brand/fitag-logo.png" alt="FITAG — Federation of IT Associations of Gujarat" className="h-6 w-auto" />
+          </a>
           <p className="mt-4 max-w-sm text-sm text-slate-400">
-            One network. Independent businesses. A verified community of computer retailers, laptop stores, repair centres and IT service providers.
+            An initiative of the IT associations of Gujarat under FITAG — the parent body of 43 member associations and 4,200+ IT partners.
           </p>
         </div>
         <div>
@@ -63,6 +58,7 @@ export function CommunityFooter() {
             <li><Link href="/stores" className="hover:text-white">All stores</Link></li>
             <li><Link href="/stores?category=laptop-repair" className="hover:text-white">Laptop repair</Link></li>
             <li><Link href="/stores?verified=true" className="hover:text-white">Verified members</Link></li>
+            <li><Link href="/about" className="hover:text-white">About CAN &amp; FITAG</Link></li>
           </ul>
         </div>
         <div>
@@ -74,7 +70,7 @@ export function CommunityFooter() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10 py-5 text-center text-xs text-slate-500">© {new Date().getFullYear()} PC Community. Store data belongs to each independent store.</div>
+      <div className="border-t border-white/10 py-5 text-center text-xs text-slate-500">© {new Date().getFullYear()} CAN — Computer Association Network. Store data belongs to each independent store.</div>
     </footer>
   );
 }

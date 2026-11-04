@@ -5,8 +5,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        navy: { DEFAULT: '#172B4D', 950: '#0A1630', 900: '#0F1F3D', 800: '#172B4D', 700: '#22396A' },
-        brand: { DEFAULT: '#2563EB', 50: '#EFF5FF', 100: '#DBE7FE', 500: '#3B82F6', 600: '#2563EB', 700: '#1D4ED8' },
+        // Warm charcoal used for headings, dark heroes and the dashboard sidebar.
+        ink: { DEFAULT: '#292524', 950: '#1C1917', 900: '#231F1D', 800: '#292524', 700: '#3A3532' },
+        // CAN orange. 600 (#C2410C) is the interactive colour: 5.2:1 with white text.
+        brand: { DEFAULT: '#C2410C', 50: '#FFF4ED', 100: '#FFE4D3', 400: '#F7941D', 500: '#F15A29', 600: '#C2410C', 700: '#9A3412' },
+        can: { red: '#C1272D', orange: '#F15A29', amber: '#F7941D' },
         surface: '#F7F8FA',
         success: '#16A34A',
         danger: '#DC2626',

@@ -182,7 +182,7 @@ function toStoreCard(s: StoreWithCard) {
     phone: s.phone,
     logoUrl: s.settings?.logoUrl ?? null,
     tagline: s.settings?.tagline ?? null,
-    primaryColor: s.settings?.primaryColor ?? '#2563EB',
+    primaryColor: s.settings?.primaryColor ?? '#C2410C',
     isVerified: s.isVerified,
     isFeatured: s.isFeatured,
     rating: Number(s.ratingAverage),

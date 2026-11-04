@@ -30,13 +30,13 @@ describe('Milestone journey', () => {
   });
 
   it('1–2. master admin creates a city and its areas', async () => {
-    const city = await http.post('/api/v1/master/cities').use(auth(admin)).send({ name: 'Vadodara', state: 'Gujarat', stateCode: '24' }).expect(201);
+    const city = await http.post('/api/v1/master/cities').use(auth(admin)).send({ name: 'Navsari', state: 'Gujarat', stateCode: '24' }).expect(201);
     cityId = city.body.id;
     const area = await http.post('/api/v1/master/areas').use(auth(admin)).send({ cityId, name: 'Alkapuri', postalCode: '390007' }).expect(201);
     areaId = area.body.id;
     await http.post('/api/v1/master/areas').use(auth(admin)).send({ cityId, name: 'Alkapuri' }).expect(409);
     const cities = await http.get('/api/v1/cities').expect(200);
-    expect(cities.body.map((c: { slug: string }) => c.slug)).toContain('vadodara');
+    expect(cities.body.map((c: { slug: string }) => c.slug)).toContain('navsari');
   });
 
   it('3. shop owner registers and applies for membership', async () => {
@@ -52,9 +52,9 @@ describe('Milestone journey', () => {
   });
 
   it('city managers can only review applications in their city', async () => {
-    const mgr = await register(app, 'Nadiad Manager', 'mgr@pccommunity.local', '9898000001');
+    const mgr = await register(app, 'Nadiad Manager', 'mgr@can.local', '9898000001');
     const nadiad = await prisma.city.findFirstOrThrow({ where: { slug: 'nadiad' } });
-    await http.patch('/api/v1/master/staff').use(auth(admin)).send({ email: 'mgr@pccommunity.local', role: 'CITY_MANAGER', cityIds: [nadiad.id] }).expect(200);
+    await http.patch('/api/v1/master/staff').use(auth(admin)).send({ email: 'mgr@can.local', role: 'CITY_MANAGER', cityIds: [nadiad.id] }).expect(200);
     const list = await http.get('/api/v1/master/applications?status=PENDING').use(auth(mgr)).expect(200);
     expect(list.body.total).toBe(0);
     const appRow = await prisma.membershipApplication.findFirstOrThrow({ where: { businessName: 'Vadodara Computers' } });
@@ -127,7 +127,7 @@ describe('Milestone journey', () => {
     const pubProducts = await pub(http.get('/api/v1/public/store/products')).expect(200);
     expect(pubProducts.body.total).toBe(2);
     expect(pubProducts.body.items[0]).not.toHaveProperty('purchasePrice');
-    const dir = await http.get('/api/v1/stores?city=vadodara&product=inspiron').expect(200);
+    const dir = await http.get('/api/v1/stores?city=navsari&product=inspiron').expect(200);
     expect(dir.body.items.map((s: { slug: string }) => s.slug)).toEqual(['vadodara-computers']);
   });
 

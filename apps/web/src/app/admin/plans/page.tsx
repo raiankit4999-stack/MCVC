@@ -27,7 +27,7 @@ export default function Plans() {
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {data?.map((p) => (
           <Card key={p.id} className="p-5">
-            <div className="flex items-center justify-between"><h2 className="font-semibold text-navy">{p.name}</h2><Badge>{p._count.subscriptions} stores</Badge></div>
+            <div className="flex items-center justify-between"><h2 className="font-semibold text-ink">{p.name}</h2><Badge>{p._count.subscriptions} stores</Badge></div>
             <p className="mt-1 text-2xl font-bold">{money(p.priceMonthly, true)}<span className="text-xs font-normal text-slate-500">/mo</span></p>
             <div className="mt-2 flex flex-wrap gap-1">{p.features.map((f) => <Badge key={f} tone="blue">{f}</Badge>)}</div>
             <form onSubmit={save(p.id)} className="mt-4 space-y-2 border-t border-slate-100 pt-4">

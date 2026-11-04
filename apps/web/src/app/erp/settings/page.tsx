@@ -54,7 +54,7 @@ export default function Settings() {
             <Field label="Logo URL"><Input name="logoUrl" type="url" defaultValue={s.logoUrl ?? ''} /></Field>
             <Field label="Hero image URL"><Input name="heroImageUrl" type="url" defaultValue={s.heroImageUrl ?? ''} /></Field>
             <Field label="Brand colour"><div className="flex gap-2"><input type="color" value={color} onChange={(e) => setColor(e.target.value)} className="h-10 w-12 rounded-lg border border-slate-200" aria-label="Brand colour" /><Input value={color} onChange={(e) => setColor(e.target.value)} /></div></Field>
-            <Field label="Accent colour"><Input name="accentColor" defaultValue={s.accentColor ?? '#172B4D'} /></Field>
+            <Field label="Accent colour"><Input name="accentColor" defaultValue={s.accentColor ?? '#1C1917'} /></Field>
             <Field label="Typography"><Select name="fontPreset" defaultValue={s.fontPreset ?? 'inter'}><option value="inter">Inter (clean)</option><option value="geist">Geist (technical)</option><option value="poppins">Poppins (friendly)</option><option value="serif">Serif (classic)</option></Select></Field>
             <Field label="WhatsApp number"><Input name="whatsappNumber" defaultValue={s.whatsappNumber ?? ''} /></Field>
             <Field label="About the store" className="sm:col-span-2"><Textarea name="about" rows={4} defaultValue={s.about ?? ''} /></Field>
@@ -80,7 +80,7 @@ export default function Settings() {
           <Card title="Preview">
             <div className="overflow-hidden rounded-b-2xl">
               <div className="flex items-center justify-between px-4 py-3" style={{ background: '#fff' }}><span className="font-bold" style={{ color: color }}>{store.name}</span><span className="rounded-md px-2 py-1 text-xs font-semibold text-white" style={{ background: color }}>Book a service</span></div>
-              <div className="px-4 py-8 text-white" style={{ background: `linear-gradient(120deg, #0a1630, ${color})` }}><p className="text-lg font-bold">{s.heroHeadline || store.name}</p><p className="text-sm opacity-80">{s.tagline}</p></div>
+              <div className="px-4 py-8 text-white" style={{ background: `linear-gradient(120deg, #1C1917, ${color})` }}><p className="text-lg font-bold">{s.heroHeadline || store.name}</p><p className="text-sm opacity-80">{s.tagline}</p></div>
             </div>
           </Card>
           {domains.data && (

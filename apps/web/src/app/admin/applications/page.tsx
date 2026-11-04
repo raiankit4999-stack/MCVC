@@ -21,7 +21,7 @@ export default function Applications() {
       <PageHeader title="Store applications" subtitle="Approving an application provisions the store workspace. Subscription billing is managed separately." />
       <Card>
         <div className="flex gap-2 border-b border-slate-100 p-4">
-          {['PENDING', 'APPROVED', 'REJECTED', ''].map((s) => <button key={s} onClick={() => setStatus(s)} className={cx('rounded-full px-3 py-1.5 text-xs font-medium', status === s ? 'bg-navy text-white' : 'bg-slate-100 text-slate-700')}>{s ? s.toLowerCase().replace(/^\w/, (c) => c.toUpperCase()) : 'All'}</button>)}
+          {['PENDING', 'APPROVED', 'REJECTED', ''].map((s) => <button key={s} onClick={() => setStatus(s)} className={cx('rounded-full px-3 py-1.5 text-xs font-medium', status === s ? 'bg-ink text-white' : 'bg-slate-100 text-slate-700')}>{s ? s.toLowerCase().replace(/^\w/, (c) => c.toUpperCase()) : 'All'}</button>)}
         </div>
         {data?.items.length ? (
           <Table head={['Business', 'Owner', 'Location', 'GSTIN', 'Plan', 'Applied', 'Status', '']}>

@@ -54,7 +54,7 @@ export default async function StoreSiteLayout({ children, params }: { children: 
         </div>
       </header>
       <main>{children}</main>
-      <footer id="contact" className="mt-20 text-slate-300" style={{ background: '#0a1630' }}>
+      <footer id="contact" className="mt-20 text-slate-300" style={{ background: '#1C1917' }}>
         <div className="mx-auto grid max-w-7xl gap-8 px-6 py-12 md:grid-cols-3">
           <div>
             <p className="text-lg font-bold text-white">{s.name}</p>
@@ -68,7 +68,7 @@ export default async function StoreSiteLayout({ children, params }: { children: 
           </ul>
           <div className="text-sm">
             {b.whatsappNumber && <a href={`https://wa.me/${b.whatsappNumber.replace('+', '')}`} className="inline-flex items-center gap-2 rounded-lg bg-[#25D366] px-4 py-2 font-semibold text-white"><Icon name="whatsapp" className="h-4 w-4" /> Chat on WhatsApp</a>}
-            <p className="mt-4 text-xs text-slate-500">A member of the PC Community network{s.isVerified && ' · Verified store'}</p>
+            <p className="mt-4 text-xs text-slate-500">A member of the Computer Association Network{s.isVerified && ' · Verified store'}</p>
           </div>
         </div>
       </footer>

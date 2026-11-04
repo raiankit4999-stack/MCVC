@@ -1,6 +1,6 @@
-# PC Community — Computer Community Network
+# CAN — Computer Association Network
 
-A multi-tenant SaaS and business community network for computer shops, laptop stores, repair centres and IT service providers. The community owner runs the network. Each member store gets its own branded website and domain, plus its own ERP/CRM and customer base.
+A multi-tenant SaaS and business community network for computer shops, laptop stores, repair centres and IT service providers, built for the member associations of **FITAG — Federation of Information Technology Associations of Gujarat** (https://fitag.in). The community owner runs the network. Each member store gets its own branded website and domain, plus its own ERP/CRM and customer base.
 
 ```
 apps/
@@ -94,6 +94,12 @@ The browser only talks to the web app. It proxies `/api/v1/*` to the API so that
 
 GST rates, HSN/SAC codes and invoice formats are configuration supplied by each store. The arithmetic is tested, but tax treatment must be validated by a tax professional before production use. The platform does not claim statutory compliance.
 
+## Brand and network data
+
+- Brand: CAN logo (`apps/web/src/components/brand.tsx`, `app/icon.svg`); palette crimson `#C1272D`, orange `#F15A29`, amber `#F7941D`. Interactive orange is `#C2410C` (5.2:1 with white text).
+- FITAG network data (`apps/api/src/seed/fitag.ts`): member-association cities by zone, parent-body profile, and the Computer Association of Nadiad member firm names. These are applied on every API start (`bootstrap-platform`). Member listings carry names only; owners complete their own contact details by claiming the listing.
+- FITAG logo and banner (`apps/web/public/brand/`) are used with credit and a link to fitag.in.
+
 ## Local development
 
 Requirements: Node 22, pnpm 10, PostgreSQL 16.
@@ -121,7 +127,7 @@ pnpm dev
 ```
 
 The seed prints its logins:
-- admin `admin@pccommunity.local` / `Password@123`
+- admin `admin@can.local` / `Password@123`
 - store owner `owner@techworld.local` / `Password@123`
 
 The demo store website is at http://techworld.mcvc.localhost:3000 (Chrome resolves `*.localhost`). API docs are at http://localhost:4000/api/docs.

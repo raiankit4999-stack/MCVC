@@ -4,12 +4,13 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { ReactNode, useState } from 'react';
 import { apiFetch } from '@/lib/client-api';
+import { CanMark } from './brand';
 import { Icon, IconName } from './icons';
 import { cx } from './ui';
 
 export interface NavSection { title: string; items: { label: string; href: string; icon: IconName }[] }
 
-export function Shell({ brand, brandSub, nav, user, children, topRight }: { brand: string; brandSub: string; nav: NavSection[]; user: { name: string; role: string }; children: ReactNode; topRight?: ReactNode }) {
+export function Shell({ brand, brandSub, nav, user, children, topRight, mark }: { brand: string; brandSub: string; nav: NavSection[]; user: { name: string; role: string }; children: ReactNode; topRight?: ReactNode; mark?: ReactNode }) {
   const path = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -23,9 +24,9 @@ export function Shell({ brand, brandSub, nav, user, children, topRight }: { bran
   }
 
   const sidebar = (
-    <aside className="flex h-full w-64 flex-col bg-navy-950 text-slate-300">
+    <aside className="flex h-full w-64 flex-col bg-ink-950 text-slate-300">
       <div className="flex items-center gap-2.5 px-5 py-5">
-        <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand text-white"><Icon name="desktop" /></span>
+        {mark ?? <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand text-sm font-bold text-white">{brand.slice(0, 1)}</span>}
         <div className="min-w-0 leading-tight">
           <p className="truncate text-sm font-bold text-white">{brand}</p>
           <p className="truncate text-[11px] text-slate-400">{brandSub}</p>
@@ -48,6 +49,7 @@ export function Shell({ brand, brandSub, nav, user, children, topRight }: { bran
           </div>
         ))}
       </nav>
+      <p className="flex items-center gap-2 px-6 pb-1 text-[10px] text-stone-500"><CanMark className="h-3 w-auto" title="CAN" /> Computer Association Network</p>
       <button onClick={logout} className="m-3 flex items-center gap-3 rounded-lg px-3 py-2 text-sm hover:bg-white/5 hover:text-white">
         <Icon name="logout" className="h-[18px] w-[18px]" /> Sign out
       </button>
@@ -72,7 +74,7 @@ export function Shell({ brand, brandSub, nav, user, children, topRight }: { bran
           <p className="truncate text-xs text-slate-500">{user.role}</p>
         </div>
         {topRight}
-        <span className="grid h-9 w-9 place-items-center rounded-full bg-navy text-xs font-semibold text-white" title={user.name}>
+        <span className="grid h-9 w-9 place-items-center rounded-full bg-ink text-xs font-semibold text-white" title={user.name}>
           {user.name.split(' ').map((p) => p[0]).slice(0, 2).join('')}
         </span>
       </header>

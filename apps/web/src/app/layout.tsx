@@ -4,8 +4,8 @@ import { ToastProvider } from '@/components/toast';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: { default: 'PC Community — Trusted computer stores & IT services', template: '%s · PC Community' },
-  description: 'Find verified computer stores, laptop shops, repair centres and IT service providers near you.',
+  title: { default: 'CAN — Computer Association Network', template: '%s · CAN' },
+  description: 'Computer Association Network: find verified computer stores, laptop shops, repair centres and IT service providers near you.',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

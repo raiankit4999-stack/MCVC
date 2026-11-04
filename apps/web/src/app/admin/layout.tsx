@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
+import { CanMark } from '@/components/brand';
 import { NavSection, Shell } from '@/components/shell';
 import { Skeleton } from '@/components/ui';
 import { apiFetch } from '@/lib/client-api';
@@ -22,5 +23,5 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       .catch(() => router.replace('/login?next=/admin'));
   }, [router]);
   if (!me) return <div className="p-6 lg:pl-72"><Skeleton className="h-96" /></div>;
-  return <Shell brand="PC Community" brandSub="Master admin" nav={NAV} user={{ name: me.name, role: label(me.platformRole!) }}>{children}</Shell>;
+  return <Shell mark={<CanMark className="h-8 w-auto" />} brand="CAN" brandSub="Community master admin" nav={NAV} user={{ name: me.name, role: label(me.platformRole!) }}>{children}</Shell>;
 }

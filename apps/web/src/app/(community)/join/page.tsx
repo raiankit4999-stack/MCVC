@@ -31,7 +31,7 @@ export default function JoinPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
-      <h1 className="text-3xl font-bold tracking-tight text-navy">Become a member</h1>
+      <h1 className="text-3xl font-bold tracking-tight text-ink">Become a member</h1>
       <p className="mt-2 text-slate-600">Get your own branded store website, ERP and CRM, and be discovered by customers across the community.</p>
       <ol className="mt-8 grid grid-cols-4 gap-2">
         {steps.map((s, i) => (
@@ -170,7 +170,7 @@ function ApplicationForm({ onDone, defaults }: { onDone: () => void; defaults: {
         <div className="grid gap-3 p-5 sm:grid-cols-2 lg:grid-cols-4">
           {plans.map((p) => (
             <button type="button" key={p.id} onClick={() => setPlan(p.id)} className={`rounded-xl p-4 text-left ring-1 ring-inset transition ${plan === p.id ? 'bg-brand-50 ring-2 ring-brand' : 'ring-slate-200 hover:bg-slate-50'}`} aria-pressed={plan === p.id}>
-              <p className="font-semibold text-navy">{p.name}</p>
+              <p className="font-semibold text-ink">{p.name}</p>
               <p className="mt-1 text-lg font-bold">{money(p.priceMonthly, true)}<span className="text-xs font-normal text-slate-500">/mo</span></p>
               <p className="mt-1 text-xs text-slate-500">{p.description}</p>
             </button>
@@ -189,7 +189,7 @@ function ApplicationStatus({ apps, hasStore }: { apps: Application[]; hasStore: 
   return (
     <Card className="p-8 text-center">
       <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-brand-50 text-brand"><Icon name={a.status === 'APPROVED' ? 'check' : 'clock'} className="h-7 w-7" /></span>
-      <h2 className="mt-4 text-xl font-semibold text-navy">{a.businessName}</h2>
+      <h2 className="mt-4 text-xl font-semibold text-ink">{a.businessName}</h2>
       <div className="mt-2 flex justify-center gap-2"><StatusBadge status={a.status} /><Badge>{a.plan.name}</Badge></div>
       <p className="mx-auto mt-4 max-w-md text-sm text-slate-600">
         {a.status === 'PENDING' && 'Your application is being reviewed by the community team. You will be notified once it is approved.'}

@@ -31,7 +31,7 @@ export default async function StoreHome({ params }: { params: Promise<{ host: st
   const [s, base, products, services] = await Promise.all([getStore(host), basePath(host), api<{ items: PubProduct[] }>('/public/store/products?pageSize=8', { host }), api<PubService[]>('/public/store/services', { host })]);
   return (
     <>
-      <section className="relative overflow-hidden text-white" style={{ background: `radial-gradient(60% 80% at 80% 40%, color-mix(in srgb, var(--brand) 55%, transparent), transparent 70%), linear-gradient(120deg, #0a1630, #0f1f3d 60%, color-mix(in srgb, var(--brand) 35%, #0f1f3d))` }}>
+      <section className="relative overflow-hidden text-white" style={{ background: `radial-gradient(60% 80% at 80% 40%, color-mix(in srgb, var(--brand) 55%, transparent), transparent 70%), linear-gradient(120deg, #1C1917, #292524 60%, color-mix(in srgb, var(--brand) 35%, #292524))` }}>
         <div className="mx-auto grid max-w-7xl items-center gap-8 px-6 pb-24 pt-16 lg:grid-cols-2">
           <div>
             {s.branding.tagline && <span className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium ring-1 ring-white/20">{s.branding.tagline}</span>}

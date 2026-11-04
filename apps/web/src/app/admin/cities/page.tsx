@@ -5,7 +5,7 @@ import { useToast } from '@/components/toast';
 import { Alert, Badge, Button, Card, Field, Input, PageHeader, Select } from '@/components/ui';
 import { apiFetch, errorText, useApi } from '@/lib/client-api';
 
-interface City { id: string; name: string; state: string; stateCode: string; isActive: boolean; _count: { stores: number }; areas: { id: string; name: string; postalCode: string | null; _count: { stores: number } }[] }
+interface City { id: string; name: string; state: string; stateCode: string; isActive: boolean; zone: string | null; associationName: string | null; associationCode: string | null; _count: { stores: number }; areas: { id: string; name: string; postalCode: string | null; _count: { stores: number } }[] }
 
 export default function Cities() {
   const toast = useToast();
@@ -24,7 +24,7 @@ export default function Cities() {
       <div className="grid gap-6 xl:grid-cols-[1fr_340px]">
         <div className="space-y-4">
           {data?.map((c) => (
-            <Card key={c.id} title={<span className="flex items-center gap-2">{c.name} <span className="font-normal text-slate-500">{c.state} ({c.stateCode})</span> <Badge>{c._count.stores} stores</Badge></span>}>
+            <Card key={c.id} title={<span className="flex items-center gap-2">{c.name} <span className="font-normal text-slate-500">{c.zone ?? c.state} · GST {c.stateCode}{c.associationCode ? ` · ${c.associationCode}` : ''}</span> <Badge>{c._count.stores} stores</Badge></span>}>
               <div className="flex flex-wrap gap-2 p-4">
                 {c.areas.length ? c.areas.map((a) => <Badge key={a.id} tone="blue">{a.name}{a.postalCode && ` · ${a.postalCode}`} · {a._count.stores}</Badge>) : <span className="text-sm text-slate-500">No areas yet</span>}
               </div>

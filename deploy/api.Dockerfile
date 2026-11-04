@@ -16,5 +16,6 @@ COPY --from=build /app /app
 WORKDIR /app/apps/api
 USER node
 EXPOSE 4000
-# Apply migrations, ensure platform bootstrap data, then start.
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/scripts/bootstrap-platform.js && node dist/main.js"]
+# Apply migrations, ensure platform bootstrap data (FITAG cities, plans, admin),
+# optionally load demo stores (SEED_DEMO=true), then start.
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/scripts/bootstrap-platform.js && if [ \"$SEED_DEMO\" = true ]; then node -r @swc-node/register prisma/seed.ts; fi && node dist/main.js"]

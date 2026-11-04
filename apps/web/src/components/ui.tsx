@@ -73,6 +73,7 @@ const tones = {
   amber: 'bg-amber-50 text-amber-800 ring-amber-200',
   red: 'bg-red-50 text-red-700 ring-red-200',
   violet: 'bg-violet-50 text-violet-700 ring-violet-200',
+  orange: 'bg-brand-50 text-brand-700 ring-brand-100',
 };
 export type Tone = keyof typeof tones;
 export function Badge({ tone = 'slate', children, className }: { tone?: Tone; children: ReactNode; className?: string }) {

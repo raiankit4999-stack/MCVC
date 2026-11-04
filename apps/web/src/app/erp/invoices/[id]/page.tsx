@@ -56,7 +56,7 @@ export default function InvoiceView({ params }: { params: Promise<{ id: string }
       <article className="rounded-2xl border border-slate-200 bg-white p-8 shadow-card print:border-0 print:p-0 print:shadow-none">
         <header className="flex flex-wrap justify-between gap-6 border-b border-slate-200 pb-6">
           <div>
-            <p className="text-lg font-bold text-navy">{inv.seller.legalName ?? inv.seller.name}</p>
+            <p className="text-lg font-bold text-ink">{inv.seller.legalName ?? inv.seller.name}</p>
             <p className="text-sm text-slate-600">{inv.seller.addressLine}</p>
             <p className="text-sm text-slate-600">{inv.seller.phone} · {inv.seller.email}</p>
             {inv.seller.gstin && <p className="text-sm font-medium">GSTIN: {inv.seller.gstin}</p>}

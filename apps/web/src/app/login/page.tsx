@@ -55,7 +55,7 @@ export default function LoginPage() {
       <div className="flex items-center justify-center p-6">
         <div className="w-full max-w-sm">
           <div className="lg:hidden"><Logo /></div>
-          <h1 className="mt-8 text-2xl font-bold text-navy">Sign in</h1>
+          <h1 className="mt-8 text-2xl font-bold text-ink">Sign in</h1>
           <p className="mb-6 mt-1 text-sm text-slate-500">Store owners, staff and community administrators.</p>
           <Suspense><LoginForm /></Suspense>
           <p className="mt-6 text-center text-sm text-slate-500">New business? <Link href="/join" className="font-semibold text-brand">Become a member</Link></p>

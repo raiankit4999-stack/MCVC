@@ -49,6 +49,9 @@ model City {
   slug        String
   state       String
   stateCode   String   @db.VarChar(2) // GST state code, e.g. "24" for Gujarat
+  zone        String?  // regional grouping, e.g. "Central Zone"
+  associationName String? // the local member association, e.g. "Computer Association of Nadiad"
+  associationCode String? // e.g. "CAN"
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now()) @db.Timestamptz(6)
 
@@ -263,8 +266,8 @@ model StoreSettings {
   about          String?
   heroImageUrl   String?
   heroHeadline   String?
-  primaryColor   String   @default("#2563EB")
-  accentColor    String   @default("#172B4D")
+  primaryColor   String   @default("#C2410C")
+  accentColor    String   @default("#1C1917")
   fontPreset     String   @default("inter")
   whatsappNumber String?
   socialLinks    Json     @default("{}")

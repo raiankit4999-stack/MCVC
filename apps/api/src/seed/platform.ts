@@ -1,4 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
+import { FITAG_NETWORK, FITAG_PROFILE } from './fitag';
 import { hash } from '@node-rs/argon2';
 
 export const CATEGORIES: { name: string; kind: 'PRODUCT' | 'SERVICE' }[] = [
@@ -23,24 +24,26 @@ const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').repla
 
 /** Idempotently creates the community, locations, categories, plans and the super admin. */
 export async function seedPlatform(prisma: PrismaClient, opts: { adminEmail: string; adminPassword: string }) {
-  const community = await prisma.community.upsert({
-    where: { slug: 'pc-community' },
-    create: { name: 'PC Community', slug: 'pc-community', tagline: "India's computer community network", settings: { supportEmail: 'support@example.com' } },
-    update: {},
-  });
+  // A deployment serves one community. Rename an existing one in place (keeps all links), else create it.
+  const brand = {
+    name: 'Computer Association Network',
+    tagline: 'CAN — trusted computer stores, laptop shops & IT services across Gujarat',
+    settings: { brandColors: ['#C1272D', '#F15A29', '#F7941D'], parent: FITAG_PROFILE } as unknown as Prisma.InputJsonValue,
+  };
+  const existing = await prisma.community.findFirst({ orderBy: { createdAt: 'asc' } });
+  const community = existing
+    ? await prisma.community.update({ where: { id: existing.id }, data: brand })
+    : await prisma.community.create({ data: { ...brand, slug: 'can' } });
 
-  const cities = [
-    { name: 'Ahmedabad', areas: [['Navrangpura', '380009'], ['Satellite', '380015'], ['Maninagar', '380008'], ['CG Road', '380006']] },
-    { name: 'Nadiad', areas: [['College Road', '387001'], ['Santram Road', '387001'], ['Station Road', '387001']] },
-    { name: 'Anand', areas: [['Vallabh Vidyanagar', '388120'], ['Station Road', '388001'], ['Ganesh Chowkdi', '388001']] },
-  ];
-  for (const c of cities) {
+  // FITAG member-association cities, grouped by zone.
+  for (const c of FITAG_NETWORK) {
+    const data = { name: c.name, state: c.state ?? 'Gujarat', stateCode: c.stateCode ?? '24', zone: c.zone, associationName: c.associationName, associationCode: c.associationCode };
     const city = await prisma.city.upsert({
-      where: { communityId_slug: { communityId: community.id, slug: slugify(c.name) } },
-      create: { communityId: community.id, name: c.name, slug: slugify(c.name), state: 'Gujarat', stateCode: '24' },
-      update: {},
+      where: { communityId_slug: { communityId: community.id, slug: c.slug } },
+      create: { ...data, communityId: community.id, slug: c.slug },
+      update: data,
     });
-    for (const [name, postalCode] of c.areas) {
+    for (const [name, postalCode] of c.areas ?? [['Main Market']]) {
       await prisma.area.upsert({ where: { cityId_slug: { cityId: city.id, slug: slugify(name) } }, create: { cityId: city.id, name, slug: slugify(name), postalCode }, update: {} });
     }
   }

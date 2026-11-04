@@ -5,6 +5,8 @@ import { compactInr, money } from '@/lib/format';
 
 /** Validated palette (dataviz validator: all checks pass, light surface). */
 export const SERIES = { blue: '#2a78d6', aqua: '#1baf7a', orange: '#eb6834' };
+/** Single-series colour: CAN orange. */
+export const BRAND_SERIES = '#F15A29';
 
 /** Single-series area chart with crosshair tooltip. The card title names the series. */
 export function SalesArea({ data: raw, dataKey = 'sales', days = 30 }: { data: { day: string; [k: string]: number | string }[]; dataKey?: string; days?: number }) {
@@ -17,8 +19,8 @@ export function SalesArea({ data: raw, dataKey = 'sales', days = 30 }: { data: {
         <AreaChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="fillSales" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor={SERIES.blue} stopOpacity={0.22} />
-              <stop offset="1" stopColor={SERIES.blue} stopOpacity={0} />
+              <stop offset="0" stopColor={BRAND_SERIES} stopOpacity={0.22} />
+              <stop offset="1" stopColor={BRAND_SERIES} stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid vertical={false} stroke="#eef0f3" />
@@ -30,7 +32,7 @@ export function SalesArea({ data: raw, dataKey = 'sales', days = 30 }: { data: {
             labelFormatter={(l) => fmtDay(String(l))}
             contentStyle={{ borderRadius: 10, border: '1px solid #e2e8f0', fontSize: 12 }}
           />
-          <Area type="monotone" dataKey={dataKey} stroke={SERIES.blue} strokeWidth={2} fill="url(#fillSales)" activeDot={{ r: 5, strokeWidth: 2, stroke: '#fff' }} />
+          <Area type="monotone" dataKey={dataKey} stroke={BRAND_SERIES} strokeWidth={2} fill="url(#fillSales)" activeDot={{ r: 5, strokeWidth: 2, stroke: '#fff' }} />
         </AreaChart>
       </ResponsiveContainer>
     </div>
@@ -77,7 +79,7 @@ export function HBars({ rows }: { rows: { label: string; value: number }[] }) {
       {rows.map((r) => (
         <li key={r.label} className="grid grid-cols-[100px_1fr_36px] items-center gap-3 text-sm" title={`${r.label}: ${r.value}`}>
           <span className="truncate text-slate-600">{r.label}</span>
-          <span className="h-3 rounded-r bg-slate-100"><span className="block h-3 rounded-r" style={{ width: `${(r.value / max) * 100}%`, background: SERIES.blue }} /></span>
+          <span className="h-3 rounded-r bg-slate-100"><span className="block h-3 rounded-r" style={{ width: `${(r.value / max) * 100}%`, background: BRAND_SERIES }} /></span>
           <span className="text-right font-semibold text-slate-900">{r.value}</span>
         </li>
       ))}

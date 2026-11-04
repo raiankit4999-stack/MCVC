@@ -19,7 +19,7 @@ export default function Repairs() {
       <PageHeader title="Repair jobs" subtitle="Job cards from intake to delivery" actions={<ButtonLink href="/erp/repairs/new">New job card</ButtonLink>} />
       <Card>
         <div className="flex flex-wrap items-center gap-2 border-b border-slate-100 p-4">
-          {FILTERS.map(([, l], i) => <button key={l} onClick={() => setF(i)} className={cx('rounded-full px-3 py-1.5 text-xs font-medium', f === i ? 'bg-navy text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200')}>{l}</button>)}
+          {FILTERS.map(([, l], i) => <button key={l} onClick={() => setF(i)} className={cx('rounded-full px-3 py-1.5 text-xs font-medium', f === i ? 'bg-ink text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200')}>{l}</button>)}
           <Input placeholder="Job no., customer, phone or device serial" value={q} onChange={(e) => setQ(e.target.value)} className="ml-auto max-w-xs" />
         </div>
         {data?.items.length ? (

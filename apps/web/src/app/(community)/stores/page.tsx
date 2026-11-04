@@ -33,6 +33,7 @@ export default async function Stores({ searchParams }: { searchParams: Promise<S
       <div className="hero-bg px-4 pb-10 pt-10 sm:px-6">
         <div className="mx-auto max-w-7xl">
           <h1 className="text-3xl font-bold text-white">{city ? `Computer stores in ${city.name}` : 'Find computer stores & IT services'}</h1>
+          {city?.associationName && <p className="mt-1 text-sm text-stone-300">Local association: {city.associationName}{city.associationCode ? ` (${city.associationCode})` : ''} · {city.zone}</p>}
           <div className="mt-6"><SearchBar cities={cities} categories={categories} defaults={sp} /></div>
         </div>
       </div>

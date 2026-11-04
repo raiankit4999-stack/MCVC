@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --brand: #2563eb;
-  --brand-accent: #172b4d;
+  --brand: #c2410c;
+  --brand-accent: #1c1917;
 }
 
 html {
@@ -18,9 +18,10 @@ body {
 
 .hero-bg {
   background:
-    radial-gradient(60% 80% at 75% 40%, rgba(124, 58, 237, 0.35), transparent 60%),
-    radial-gradient(50% 60% at 95% 70%, rgba(37, 99, 235, 0.35), transparent 60%),
-    linear-gradient(120deg, #0a1630 0%, #0f1f3d 55%, #172b4d 100%);
+    radial-gradient(60% 80% at 75% 40%, rgba(241, 90, 41, 0.32), transparent 60%),
+    radial-gradient(45% 60% at 95% 75%, rgba(193, 39, 45, 0.30), transparent 60%),
+    radial-gradient(40% 50% at 60% 0%, rgba(247, 148, 29, 0.18), transparent 60%),
+    linear-gradient(120deg, #1c1917 0%, #231f1d 55%, #292524 100%);
 }
 
 @media print {
