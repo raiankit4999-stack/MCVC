@@ -32,7 +32,7 @@ export async function seedPlatform(prisma: PrismaClient, opts: { adminEmail: str
     settings: {
       brandColors: ['#C1272D', '#F15A29', '#F7941D'],
       parent: FITAG_PROFILE,
-      network: { team: FITAG_DATA.team, events: FITAG_DATA.events, gallery: FITAG_DATA.gallery, serviceCentres: FITAG_DATA.serviceCentres, usefulLinks: FITAG_DATA.usefulLinks },
+      network: { team: FITAG_DATA.team, leaders: FITAG_DATA.leaders, photoWall: FITAG_DATA.photoWall, events: FITAG_DATA.events, gallery: FITAG_DATA.gallery, serviceCentres: FITAG_DATA.serviceCentres, usefulLinks: FITAG_DATA.usefulLinks },
     } as unknown as Prisma.InputJsonValue,
   };
   const existing = await prisma.community.findFirst({ orderBy: { createdAt: 'asc' } });

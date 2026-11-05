@@ -111,7 +111,7 @@
    "officeBearers": [
     {
      "post": "President",
-     "name": "Vipul amrutiya",
+     "name": "Vipul Amrutiya",
      "firm": null
     },
     {
@@ -1223,7 +1223,7 @@
     },
     {
      "post": "Secretary",
-     "name": "Samir virani",
+     "name": "Samir Virani",
      "firm": null
     }
    ],
@@ -4207,56 +4207,76 @@
    "photo": "/fitag/team-mr-kaushik-pandya.webp",
    "name": "Mr. Kaushik Pandya",
    "role": "Advisory Committee",
-   "city": "ACMA"
+   "city": "ACMA",
+   "years": "2009-10"
   },
   {
    "section": "Advisory Committee",
    "photo": "/fitag/team-mr-yogesh-thakkar.webp",
    "name": "Mr. Yogesh Thakkar",
    "role": "Advisory Committee",
-   "city": "BITA"
+   "city": "BITA",
+   "years": "2011-12",
+   "phone": "9824009359",
+   "email": "yogesh@rhythmindia.net"
   },
   {
    "section": "Advisory Committee",
    "photo": "/fitag/team-mr-gaurang-vyas.webp",
    "name": "Mr. Gaurang Vyas",
    "role": "Advisory Committee",
-   "city": "GCHA"
+   "city": "GCHA",
+   "years": "2013-14",
+   "phone": "9824066777",
+   "email": "cggaurang@gmail.com"
   },
   {
    "section": "Advisory Committee",
    "photo": "/fitag/team-mr-amit-shah.webp",
    "name": "Mr. Amit Shah",
    "role": "Advisory Committee",
-   "city": "BITA"
+   "city": "BITA",
+   "years": "2015",
+   "phone": "9227527157",
+   "email": "amit@absinfotel.com"
   },
   {
    "section": "Advisory Committee",
    "photo": "/fitag/team-mr-mitesh-dave.webp",
    "name": "Mr. Mitesh Dave",
    "role": "Advisory Committee",
-   "city": null
+   "city": null,
+   "years": "2016-18",
+   "phone": "9824208215",
+   "email": "mitesh.dave@smartstation.in"
   },
   {
    "section": "Advisory Committee",
    "photo": "/fitag/team-mr-praful-desai.webp",
-   "name": "Mr. PRAFUL DESAI",
+   "name": "Mr. Praful Desai",
    "role": "Advisory Committee",
-   "city": "RCTA"
+   "city": "RCTA",
+   "years": "2018-20",
+   "phone": "9909953131",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": "/fitag/team-late-mr-hitesh-patni.webp",
    "name": "Late Mr. Hitesh Patni",
    "role": "Advisory Committee",
-   "city": "BITA"
+   "city": "BITA",
+   "years": "2020-23",
+   "phone": "9227702576",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": "/fitag/team-mr-pranav-parikh.webp",
    "name": "Mr. Pranav Parikh",
    "role": null,
-   "city": null
+   "city": null,
+   "years": "2022"
   },
   {
    "section": "Advisory Committee",
@@ -4268,135 +4288,171 @@
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. VIKASDUTT SHARMA",
+   "name": "Mr. Vikasdutt Sharma",
    "role": "Advisory Committee",
    "city": "GITA"
   },
   {
    "section": "Advisory Committee",
    "photo": "/fitag/team-mr-chirag-bhatt.webp",
-   "name": "Mr. CHIRAG BHATT",
+   "name": "Mr. Chirag Bhatt",
    "role": "Advisory Committee",
-   "city": "GCA"
+   "city": "GCA",
+   "phone": "9824392287",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. KEYUR DESAI",
+   "name": "Mr. Keyur Desai",
    "role": "Advisory Committee",
-   "city": "CAN"
+   "city": "CAN",
+   "phone": "99789 94959",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. KISHAN BAROT",
+   "name": "Mr. Kishan Barot",
    "role": "Advisory Committee",
-   "city": "AMRELI"
+   "city": "AMRELI",
+   "phone": "9825761217",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. DHARESH DHADUK",
+   "name": "Mr. Dharesh Dhaduk",
    "role": "Advisory Committee",
-   "city": "GCTA"
+   "city": "GCTA",
+   "phone": "9879389482",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. PANKAJ GAMI",
+   "name": "Mr. Pankaj Gami",
    "role": "Advisory Committee",
-   "city": "SDITA"
+   "city": "SDITA",
+   "phone": null,
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. PARAG RUPARELIYA",
+   "name": "Mr. Parag Rupareliya",
    "role": "Advisory Committee",
-   "city": "JUNAGADH"
+   "city": "JUNAGADH",
+   "phone": "9824222253",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. MAYUR TRIVEDI",
+   "name": "Mr. Mayur Trivedi",
    "role": "Advisory Committee",
-   "city": "CTAP"
+   "city": "CTAP",
+   "phone": "9898098088",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. DARSHAN VALIYA",
+   "name": "Mr. Darshan Valiya",
    "role": "Advisory Committee",
-   "city": "MAHUVA"
+   "city": "MAHUVA",
+   "phone": "9825879869",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. DARSHAN SHAH",
+   "name": "Mr. Darshan Shah",
    "role": "Advisory Committee",
-   "city": "SITA"
+   "city": "SITA",
+   "phone": "9825145601",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. SIGNESH PATEL",
+   "name": "Mr. Signesh Patel",
    "role": "Advisory Committee",
-   "city": "BARDOLI"
+   "city": "BARDOLI",
+   "phone": "9825426317",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. TARUN PATEL",
+   "name": "Mr. Tarun Patel",
    "role": "Advisory Committee",
-   "city": "DCMA"
+   "city": "DCMA",
+   "phone": "9824602307",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": "/fitag/team-mr-ramesh-laljani.webp",
-   "name": "Mr. RAMESH LALJANI",
+   "name": "Mr. Ramesh Laljani",
    "role": "Advisory Committee",
-   "city": "HITA"
+   "city": "HITA",
+   "phone": "9825175606",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. MANOJ BATHEL",
+   "name": "Mr. Manoj Bathel",
    "role": "Advisory Committee",
-   "city": "C"
+   "city": null,
+   "phone": null,
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": "/fitag/team-mr-yogesh-patel.webp",
-   "name": "Mr. YOGESH PATEL",
+   "name": "Mr. Yogesh Patel",
    "role": "Advisory Committee",
-   "city": "VCMA"
+   "city": "VCMA",
+   "phone": "9898247179",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": "/fitag/team-mr-rushikesh-soni.webp",
-   "name": "Mr. RUSHIKESH SONI",
+   "name": "Mr. Rushikesh Soni",
    "role": "Advisory Committee",
-   "city": "PCMA"
+   "city": "PCMA",
+   "phone": "8200097484",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. VIPUL CHAUHAN",
+   "name": "Mr. Vipul Chauhan",
    "role": "Advisory Committee",
-   "city": "ABCD"
+   "city": "ABCD",
+   "phone": "9909946618",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. KEKIN GANATRA",
+   "name": "Mr. Kekin Ganatra",
    "role": "Advisory Committee",
-   "city": "SCMA"
+   "city": "SCMA",
+   "phone": "9377328560",
+   "email": null
   },
   {
    "section": "Advisory Committee",
    "photo": null,
-   "name": "Mr. BHARAT PATADIYA",
+   "name": "Mr. Bharat Patadiya",
    "role": "Advisory Committee",
-   "city": "ZITA"
+   "city": "ZITA",
+   "phone": "9824285281",
+   "email": "mbinfoware@gmail.com"
   }
  ],
  "events": [
@@ -4835,6 +4891,930 @@
   {
    "label": "Help desk",
    "email": "helpdesk@fitag.in"
+  }
+ ],
+ "photoWall": [
+  "/fitag/wall-0.webp",
+  "/fitag/wall-1.webp",
+  "/fitag/wall-2.webp",
+  "/fitag/wall-3.webp",
+  "/fitag/wall-4.webp",
+  "/fitag/wall-5.webp",
+  "/fitag/wall-6.webp",
+  "/fitag/wall-7.webp",
+  "/fitag/wall-8.webp",
+  "/fitag/wall-9.webp",
+  "/fitag/wall-10.webp",
+  "/fitag/wall-11.webp",
+  "/fitag/wall-12.webp",
+  "/fitag/wall-13.webp",
+  "/fitag/wall-14.webp",
+  "/fitag/wall-15.webp",
+  "/fitag/wall-16.webp",
+  "/fitag/wall-17.webp",
+  "/fitag/wall-18.webp",
+  "/fitag/wall-19.webp",
+  "/fitag/wall-20.webp",
+  "/fitag/wall-21.webp",
+  "/fitag/wall-22.webp",
+  "/fitag/wall-23.webp",
+  "/fitag/wall-24.webp",
+  "/fitag/wall-25.webp",
+  "/fitag/wall-26.webp",
+  "/fitag/wall-27.webp",
+  "/fitag/wall-28.webp",
+  "/fitag/wall-29.webp",
+  "/fitag/wall-30.webp",
+  "/fitag/wall-31.webp",
+  "/fitag/wall-32.webp",
+  "/fitag/wall-33.webp",
+  "/fitag/wall-34.webp",
+  "/fitag/wall-35.webp",
+  "/fitag/wall-36.webp",
+  "/fitag/wall-37.webp",
+  "/fitag/wall-38.webp",
+  "/fitag/wall-39.webp"
+ ],
+ "leaders": [
+  {
+   "post": "President",
+   "name": "Vallabh Kasundra",
+   "zone": "Central Zone 1",
+   "association": "Ahmedabad Computer Merchant Association",
+   "code": "ACMA",
+   "phone": "9824412450",
+   "email": "president@acmaindia.com",
+   "associationSlug": "ahmedabad",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Vipul Dave",
+   "zone": "Central Zone 1",
+   "association": "Gandhinagar Computer Hardware Association",
+   "code": "GCHA",
+   "phone": "9825470007",
+   "email": "vvdave@yahoo.com",
+   "associationSlug": "gandhinagar",
+   "photo": "/fitag/leader-president-vipul-dave.webp"
+  },
+  {
+   "post": "President",
+   "name": "Vipul Amrutiya",
+   "zone": "Central Zone 1",
+   "association": "Morbi Information Technology Association",
+   "code": "MITA",
+   "phone": "9898089906",
+   "email": "patidarinfoworld@gmail.com",
+   "associationSlug": "morbi",
+   "photo": "/fitag/leader-president-vipul-amrutiya.webp"
+  },
+  {
+   "post": "President",
+   "name": "Kekin Ganatra",
+   "zone": "Central Zone 1",
+   "association": "Surendranagar Computer Merchant Association",
+   "code": "SCMA",
+   "phone": "9824227560",
+   "email": "treatexperts@yahoo.com",
+   "associationSlug": "surendranagar",
+   "photo": "/fitag/leader-president-kekin-ganatra.webp"
+  },
+  {
+   "post": "President",
+   "name": "Bharatbhai Patadiya",
+   "zone": "Central Zone 1",
+   "association": "Zalawad Information Technology Association",
+   "code": "ZITA",
+   "phone": "98242 85281",
+   "email": "mbinfoware@gmail.com",
+   "associationSlug": "zalawad",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Pankaj Patel",
+   "zone": "Central Zone 1",
+   "association": "Surendranagar District Information Technology Association",
+   "code": "SDITA",
+   "phone": "9725661999",
+   "email": "exceltechnology2012@gmail.com",
+   "associationSlug": "sdita",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Tirthesh Shah",
+   "zone": "Central Zone 2",
+   "association": "Ankleshwar / Bharuch Information Technology Association",
+   "code": "ABITA",
+   "phone": "9909903804",
+   "email": "tirtheshroman@yahoo.com",
+   "associationSlug": "ankleshwar-bharuch",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Piyush Shah",
+   "zone": "Central Zone 2",
+   "association": "Baroda Information Technology Association",
+   "code": "BITA",
+   "phone": "9824023475",
+   "email": "psmarketing@rediffmail.com",
+   "associationSlug": "baroda",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Jaymin Shah",
+   "zone": "Central Zone 2",
+   "association": "Charotar Information Technology Association",
+   "code": "CHITA",
+   "phone": "9974697421",
+   "email": "aadityasystem@gmail.com",
+   "associationSlug": "charotar",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Chirag Kanaiyalal Bhatt",
+   "zone": "Central Zone 2",
+   "association": "Godhara Computer Association",
+   "code": "GCA",
+   "phone": "9824392287",
+   "email": "onestinfo@gmail.com",
+   "associationSlug": "godhara",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Jitendra Vekariya",
+   "zone": "Saurashtra Zone",
+   "association": "Amreli District Information Technology Association",
+   "code": "ADITA",
+   "phone": "9925190217",
+   "email": "hkcs_aml@yahoo.co.in",
+   "associationSlug": "amreli",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Hemanat Shah",
+   "zone": "Saurashtra Zone",
+   "association": "Bhavanagar Information Technology Association",
+   "code": "BITA",
+   "phone": "98252 06486",
+   "email": "htcompad@gmail.com",
+   "associationSlug": "bhavanagar",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Dharesh B Dhaduk",
+   "zone": "Saurashtra Zone",
+   "association": "Gondal Computer Traders Association",
+   "code": "GCTA",
+   "phone": "9879389482",
+   "email": "yamunainfo@gmail.com",
+   "associationSlug": "gondal",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Dilipbhai Mehta",
+   "zone": "Saurashtra Zone",
+   "association": "Junagadh Information Technology Association",
+   "code": "JITA",
+   "phone": "9825220416",
+   "email": "crazy_computers@hotmail.com",
+   "associationSlug": "junagadh",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Mayur Trivedi",
+   "zone": "Saurashtra Zone",
+   "association": "Computer Traders Association Porbandar",
+   "code": "CTAP",
+   "phone": "9898098088",
+   "email": "2112mayur@gmail.com",
+   "associationSlug": "porbandar",
+   "photo": "/fitag/leader-president-mayur-trivedi.webp"
+  },
+  {
+   "post": "President",
+   "name": "Kiritkumar Oganja",
+   "zone": "Saurashtra Zone",
+   "association": "Rajkot Computer Traders Association",
+   "code": "RCTA",
+   "phone": "9428211618",
+   "email": "president@rcta.co.in",
+   "associationSlug": "rcta",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Jatin Sanghani",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "92274 00887",
+   "email": "jatin@safesolutions.co.in",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Darshan Valiya",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "98258 79869",
+   "email": "valia.darsh@gmail.com",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Ashwin Kothari",
+   "zone": "Saurashtra Zone",
+   "association": "Nawanagar IT Association",
+   "code": "NIA",
+   "phone": "94262 07074",
+   "email": "kothariash@gmail.com",
+   "associationSlug": null,
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Pratik Moradiya",
+   "zone": "South Zone",
+   "association": "Surat Computer Association",
+   "code": "SCA",
+   "phone": "9825630740",
+   "email": "linuxcomputer257@gmail.com",
+   "associationSlug": "surat",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "P.Yeswantkumar",
+   "zone": "South Zone",
+   "association": "Information Technsisilology Association of SILVASSA",
+   "code": "ITAS",
+   "phone": "9825148431",
+   "email": "nano.silvassa@gmail.com",
+   "associationSlug": "selvassa",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Tushar Panchal",
+   "zone": "South Zone",
+   "association": "Valsad Association of Information Technologies",
+   "code": "VAIT",
+   "phone": "9662054741",
+   "email": "vait.valsad@gmail.com",
+   "associationSlug": "valsad",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Ranchhod Tadha",
+   "zone": "South Zone",
+   "association": "Vapi Information Technology Association",
+   "code": "VITA",
+   "phone": "9428885295",
+   "email": "hardikinfovapi@yahoo.in",
+   "associationSlug": "vapi",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Manoj Bhavsar",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "9327616330",
+   "email": "bita.bardoli@gmail.com",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Bihag V. Desai",
+   "zone": "South Zone",
+   "association": "South Gujarat Information Technologists Association",
+   "code": "SITA",
+   "phone": "9662534313",
+   "email": "info@agtglobal.in",
+   "associationSlug": "sita",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Mr. Jignesh Naik",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "9825146598",
+   "email": "admin@infralineit.com",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Shivram Prajapati",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "9429421835",
+   "email": "ajanandinfotech1@gmail.com",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Vijaybhai Amrutlal Sudrasna",
+   "zone": "North Zone",
+   "association": "Deesa Computer Merchant Association",
+   "code": "DCMA",
+   "phone": "8780366623",
+   "email": "minfotechdeesa@yahoo.com",
+   "associationSlug": "deesa",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Ramesh Laljani",
+   "zone": "North Zone",
+   "association": "Himatnagar Information Technology Association",
+   "code": "HITA",
+   "phone": "98251 75606",
+   "email": "laljanirk2007@gmail.com",
+   "associationSlug": "himatnagar",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Mukesh Patel",
+   "zone": "North Zone",
+   "association": "Mehsana Computer Merchant Association",
+   "code": "MCMA",
+   "phone": "9979664780",
+   "email": "simmisystem@yahoo.com",
+   "associationSlug": "mehsana",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Manojbhai Maheshwari",
+   "zone": "North Zone",
+   "association": "Palanpur Information Technology Association",
+   "code": "PITA",
+   "phone": "9824257870",
+   "email": "mbather@rediffmail.com",
+   "associationSlug": "palanpur",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Rushikesh Soni",
+   "zone": "North Zone",
+   "association": "Patan Computer Merchant Association",
+   "code": "PCMA",
+   "phone": "8200097484",
+   "email": "rishi_computer@yahoo.com",
+   "associationSlug": "patan",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Alpesh Mevada",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "9909350912",
+   "email": "info@shivamcomputer.co.in",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Mr. Laxmanbhai N Patel",
+   "zone": "North Zone",
+   "association": "Tharad – Waw Information Technology Association",
+   "code": "TWCIA",
+   "phone": "9974393701",
+   "email": "shivam.computer@rocketmail.com",
+   "associationSlug": "tharad",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Pradip Patel",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "9825364752",
+   "email": "pradipvjp@yahoo.co.in",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Gunvant Prajapati",
+   "zone": "North Zone",
+   "association": "Visnagar Computer Merchant Association",
+   "code": "VCMA",
+   "phone": "9824342998",
+   "email": "gp_prajapati@gmail.com",
+   "associationSlug": "visnagar",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Vipul Chauhan",
+   "zone": "Kutch Zone",
+   "association": "Association of Bhuj Computer Dealer",
+   "code": "ABCD",
+   "phone": "9909946618",
+   "email": "xlentvipul@gmail.com",
+   "associationSlug": "bhuj",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Vikasdutt Sharma",
+   "zone": "Kutch Zone",
+   "association": "Gandhidham Information Technology Welfare Association",
+   "code": "GITA",
+   "phone": "9924302777",
+   "email": "vikas@vistechno.com",
+   "associationSlug": "gandhidham",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Vaibhav Chavda",
+   "zone": "Kutch Zone",
+   "association": "Mandvi Computer Dealer Association",
+   "code": "MCDA",
+   "phone": "9898368335",
+   "email": "ashapura.cc@gmail.com",
+   "associationSlug": "mandvi",
+   "photo": null
+  },
+  {
+   "post": "President",
+   "name": "Nitesh Senghani",
+   "zone": "Kutch Zone",
+   "association": "MITWA Cheritable Trust",
+   "code": "MITWA",
+   "phone": "9879159191",
+   "email": "niceinfotech.cafe@gmail.com",
+   "associationSlug": "mundra",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Purav Shah",
+   "zone": "Central Zone 1",
+   "association": "Ahmedabad Computer Merchant Association",
+   "code": "ACMA",
+   "phone": "9327000722",
+   "email": "secretary@acmaindia.com",
+   "associationSlug": "ahmedabad",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Vijay Patel",
+   "zone": "Central Zone 1",
+   "association": "Gandhinagar Computer Hardware Association",
+   "code": "GCHA",
+   "phone": "9825133057",
+   "email": "vijay@innivetechnology.com",
+   "associationSlug": "gandhinagar",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Maulik Vadaviya",
+   "zone": "Central Zone 1",
+   "association": "Morbi Information Technology Association",
+   "code": "MITA",
+   "phone": "9913246086",
+   "email": "rudrainfotechmorbi@gmail.com",
+   "associationSlug": "morbi",
+   "photo": "/fitag/leader-secretary-maulik-vadaviya.webp"
+  },
+  {
+   "post": "Secretary",
+   "name": "Hardik Shah",
+   "zone": "Central Zone 1",
+   "association": "Surendranagar Computer Merchant Association",
+   "code": "SCMA",
+   "phone": "9173941010",
+   "email": "adinathcomp@gmail.com",
+   "associationSlug": "surendranagar",
+   "photo": "/fitag/leader-secretary-hardik-shah.webp"
+  },
+  {
+   "post": "Secretary",
+   "name": "Jigesh Adeshra",
+   "zone": "Central Zone 1",
+   "association": "Zalawad Information Technology Association",
+   "code": "ZITA",
+   "phone": null,
+   "email": "shreesoft123@gmail.com",
+   "associationSlug": "zalawad",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Mehul Solanki",
+   "zone": "Central Zone 1",
+   "association": "Surendranagar District Information Technology Association",
+   "code": "SDITA",
+   "phone": "99743 42111",
+   "email": "kinjalcomputer@gmail.com",
+   "associationSlug": "sdita",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Hardik Mistry",
+   "zone": "Central Zone 2",
+   "association": "Ankleshwar / Bharuch Information Technology Association",
+   "code": "ABITA",
+   "phone": "93777 72960",
+   "email": "secretary@abita.co.in",
+   "associationSlug": "ankleshwar-bharuch",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Rashmikant N. Joshi",
+   "zone": "Central Zone 2",
+   "association": "Baroda Information Technology Association",
+   "code": "BITA",
+   "phone": "9825292471",
+   "email": "info@aakashmarketing.com",
+   "associationSlug": "baroda",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Manoj Jadav",
+   "zone": "Central Zone 2",
+   "association": "Charotar Information Technology Association",
+   "code": "CHITA",
+   "phone": "9824638016",
+   "email": "manncomputervvn@gmail.com",
+   "associationSlug": "charotar",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Rajesh Rameshchandra Shah",
+   "zone": "Central Zone 2",
+   "association": "Godhara Computer Association",
+   "code": "GCA",
+   "phone": "9825519179",
+   "email": "pearlcomputers.godhra@gmail.com",
+   "associationSlug": "godhara",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Keyur k Ramani",
+   "zone": "Saurashtra Zone",
+   "association": "Amreli District Information Technology Association",
+   "code": "ADITA",
+   "phone": "9974043535",
+   "email": "mahavircomputer99@gmail.com",
+   "associationSlug": "amreli",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Rupesh Rajani",
+   "zone": "Saurashtra Zone",
+   "association": "Bhavanagar Information Technology Association",
+   "code": "BITA",
+   "phone": "9825207146",
+   "email": "ram_csmc@yahoo.com",
+   "associationSlug": "bhavanagar",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Kishan C Gajipara",
+   "zone": "Saurashtra Zone",
+   "association": "Gondal Computer Traders Association",
+   "code": "GCTA",
+   "phone": null,
+   "email": null,
+   "associationSlug": "gondal",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Jignesh Polara",
+   "zone": "Saurashtra Zone",
+   "association": "Junagadh Information Technology Association",
+   "code": "JITA",
+   "phone": "9925403445",
+   "email": "djpolara@gmail.com",
+   "associationSlug": "junagadh",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Vipul Kotecha",
+   "zone": "Saurashtra Zone",
+   "association": "Computer Traders Association Porbandar",
+   "code": "CTAP",
+   "phone": "9825230466",
+   "email": "vip_compulink@rediffmail.com",
+   "associationSlug": "porbandar",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Prashant Pipaliya",
+   "zone": "Saurashtra Zone",
+   "association": "Rajkot Computer Traders Association",
+   "code": "RCTA",
+   "phone": "9825386685",
+   "email": "secretory@rcta.co.in",
+   "associationSlug": "rcta",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Krunal Godhasara",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "9426451234",
+   "email": "uv.business7@gmail.com",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Dinesh Agravat.",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "9825853803",
+   "email": "hccmhv@yahoo.com",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Ashwini Pal",
+   "zone": "Saurashtra Zone",
+   "association": "Nawanagar IT Association",
+   "code": "NIA",
+   "phone": "98790 91007",
+   "email": "nawangarit@gmail.com",
+   "associationSlug": null,
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Satish Koladiya",
+   "zone": "South Zone",
+   "association": "Surat Computer Association",
+   "code": "SCA",
+   "phone": "9377571161",
+   "email": "satishkoladiya@yahoo.com",
+   "associationSlug": "surat",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Samir Virani",
+   "zone": "South Zone",
+   "association": "Information Technsisilology Association of SILVASSA",
+   "code": "ITAS",
+   "phone": "9924005347",
+   "email": "samir.virani@rightclickinfotech.co.in",
+   "associationSlug": "selvassa",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Mayur K Patel",
+   "zone": "South Zone",
+   "association": "Valsad Association of Information Technologies",
+   "code": "VAIT",
+   "phone": "9427112200",
+   "email": "vait.valsad@gmail.com",
+   "associationSlug": "valsad",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Dhruval Shah",
+   "zone": "South Zone",
+   "association": "Vapi Information Technology Association",
+   "code": "VITA",
+   "phone": "9033300020",
+   "email": "evergreencomputersvapi@gmail.com",
+   "associationSlug": "vapi",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Anil Mistry",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "9879125333",
+   "email": "anilmistry40@gmail.com",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Javed Nalbandh",
+   "zone": "South Zone",
+   "association": "South Gujarat Information Technologists Association",
+   "code": "SITA",
+   "phone": "9825494996",
+   "email": "nalbandh@gmail.com",
+   "associationSlug": "sita",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Mr. Rohan Sule",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "9825107347",
+   "email": "rohan@netlinkitgroup.com",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Jignesh Thakkar",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "9427044346",
+   "email": "udaycomputer143@gmail.com",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Jigneshbhai A Joshi",
+   "zone": "North Zone",
+   "association": "Deesa Computer Merchant Association",
+   "code": "DCMA",
+   "phone": "9510065405",
+   "email": "rajgurucomputer84@gmail.com",
+   "associationSlug": "deesa",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Rakesh Songara",
+   "zone": "North Zone",
+   "association": "Himatnagar Information Technology Association",
+   "code": "HITA",
+   "phone": "97148 13355",
+   "email": "sk.sales2010@gmail.com",
+   "associationSlug": "himatnagar",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Sarang Patel",
+   "zone": "North Zone",
+   "association": "Mehsana Computer Merchant Association",
+   "code": "MCMA",
+   "phone": "9924841441",
+   "email": "compex.communation@gmail.com",
+   "associationSlug": "mehsana",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Bhavinbhai Thakkar",
+   "zone": "North Zone",
+   "association": "Palanpur Information Technology Association",
+   "code": "PITA",
+   "phone": "9016195264",
+   "email": "thakkar1987@yahoo.com",
+   "associationSlug": "palanpur",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Nilesh Prajapati",
+   "zone": "North Zone",
+   "association": "Patan Computer Merchant Association",
+   "code": "PCMA",
+   "phone": "9925466166",
+   "email": "pranil_info@yahoo.co.in",
+   "associationSlug": "patan",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Sajid Dhukka",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "9925942950",
+   "email": "citizencomputersolution@gmail.com",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Bhikhabhai Patel",
+   "zone": "North Zone",
+   "association": "Tharad – Waw Information Technology Association",
+   "code": "TWCIA",
+   "phone": "8000026622",
+   "email": "shivam.computer@rocketmail.com",
+   "associationSlug": "tharad",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Kanu Patel",
+   "zone": "South Zone",
+   "association": null,
+   "code": null,
+   "phone": "9979852774",
+   "email": "kjpatel774@gmail.com",
+   "associationSlug": "bardoli",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Kiranpuri J Goswami",
+   "zone": "North Zone",
+   "association": "Visnagar Computer Merchant Association",
+   "code": "VCMA",
+   "phone": "9898157368",
+   "email": "universal_infosys@yahoo.com",
+   "associationSlug": "visnagar",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Manji Ravji Patel",
+   "zone": "Kutch Zone",
+   "association": "Association of Bhuj Computer Dealer",
+   "code": "ABCD",
+   "phone": "9726666662",
+   "email": "pmbhuj@gmail.com",
+   "associationSlug": "bhuj",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Ashok Ojha",
+   "zone": "Kutch Zone",
+   "association": "Gandhidham Information Technology Welfare Association",
+   "code": "GITA",
+   "phone": "9898190377",
+   "email": "sales@swastiktechno.com",
+   "associationSlug": "gandhidham",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Mahesh Rabadiya",
+   "zone": "Kutch Zone",
+   "association": "Mandvi Computer Dealer Association",
+   "code": "MCDA",
+   "phone": "9913891581",
+   "email": "skcsmandvi@gmail.com",
+   "associationSlug": "mandvi",
+   "photo": null
+  },
+  {
+   "post": "Secretary",
+   "name": "Sandip Velani",
+   "zone": "Kutch Zone",
+   "association": "MITWA Cheritable Trust",
+   "code": "MITWA",
+   "phone": "9825753731",
+   "email": "visioncomputer4@gmail.com",
+   "associationSlug": "mundra",
+   "photo": null
   }
  ]
 }

@@ -76,7 +76,9 @@ import fitagData from './fitag-data.json';
 export interface FitagAssociation { slug: string; name: string; code: string | null; zone: string; city: string; officeBearers: { post: string; name: string; firm: string | null }[]; firms: string[]; source: string }
 export const FITAG_DATA = fitagData as unknown as {
   associations: FitagAssociation[];
-  team: { section: string; photo: string | null; name: string; role: string | null; city: string | null }[];
+  team: { section: string; photo: string | null; name: string; role: string | null; city: string | null; years?: string | null; phone?: string | null; email?: string | null }[];
+  leaders: { post: string; name: string; zone: string | null; association: string | null; code: string | null; associationSlug: string | null; phone: string | null; email: string | null; photo: string | null }[];
+  photoWall: string[];
   events: { slug: string; title: string; images: string[] }[];
   gallery: { caption: string; images: string[] }[];
   serviceCentres: { brand: string; address: string; phone: string; email: string; tollFree: string; hours: string }[];

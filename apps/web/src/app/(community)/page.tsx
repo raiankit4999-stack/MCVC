@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import { AssociationCard } from '@/components/association-card';
-import { HeroArt } from '@/components/hero-art';
+import { AssociationBadge } from '@/components/association-card';
 import { Icon, IconName } from '@/components/icons';
+import { CountUp, Reveal } from '@/components/motion';
+import { AdvisoryCommittee, CoreCommittee, LeadersDirectory } from '@/components/people';
+import { PhotoWall, Ticker } from '@/components/photo-wall';
+import { STOCK_HERO_IMAGES } from '@/lib/hero';
 import { StoreCard } from '@/components/store-card';
 import { api } from '@/lib/server-api';
 import { ZONE_ORDER, type Association, type Category, type City, type CommunityProfile, type Network, type StoreCard as S } from '@/lib/types';
@@ -30,13 +34,17 @@ export default async function Home() {
   const parent = community.settings.parent;
   const members = associations.reduce((n, a) => n + a.memberCount, 0);
   const zones = ZONE_ORDER.map((z) => [z, associations.filter((a) => a.zone === z).sort((a, b) => b.memberCount - a.memberCount)] as const).filter(([, l]) => l.length);
-  const core = network.team?.filter((t) => t.section === 'Core Committee' && t.photo).slice(0, 6) ?? [];
+  const core = network.team?.filter((t) => t.section === 'Core Committee') ?? [];
+  const advisory = network.team?.filter((t) => t.section === 'Advisory Committee') ?? [];
+  const leaders = network.leaders ?? [];
+  const leaderZones = ZONE_ORDER.filter((z) => leaders.some((l) => l.zone === z));
+  const wall = [...STOCK_HERO_IMAGES, ...(network.photoWall ?? [])];
   const event = network.events?.find((e) => e.images.length);
 
   return (
     <>
       <section className="hero-bg relative overflow-hidden pb-24 text-white">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pt-14 sm:px-6 lg:grid-cols-[1.35fr_1fr] lg:pt-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pt-14 sm:px-6 lg:grid-cols-[1.25fr_1fr] lg:pt-16">
           <div>
             <span className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-orange-100 ring-1 ring-white/15">Computer Association Network · Gujarat</span>
             <h1 className="mt-5 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl">
@@ -47,12 +55,20 @@ export default async function Home() {
             </p>
             <div className="mt-8 max-w-3xl"><SearchBar cities={cities} categories={categories} /></div>
             <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-sm">
-              <div><dt className="sr-only">Associations</dt><dd><span className="text-xl font-bold">{associations.length}</span> <span className="text-stone-400">associations</span></dd></div>
-              <div><dt className="sr-only">Member businesses</dt><dd><span className="text-xl font-bold">{members.toLocaleString('en-IN')}</span> <span className="text-stone-400">member businesses</span></dd></div>
-              <div><dt className="sr-only">Cities</dt><dd><span className="text-xl font-bold">{cities.length}</span> <span className="text-stone-400">cities</span></dd></div>
+              <div><dt className="sr-only">Associations</dt><dd><span className="text-2xl font-extrabold"><CountUp value={associations.length} /></span> <span className="text-stone-400">associations</span></dd></div>
+              <div><dt className="sr-only">Member businesses</dt><dd><span className="text-2xl font-extrabold"><CountUp value={members} /></span> <span className="text-stone-400">member businesses</span></dd></div>
+              <div><dt className="sr-only">Cities</dt><dd><span className="text-2xl font-extrabold"><CountUp value={cities.length} /></span> <span className="text-stone-400">cities</span></dd></div>
+              <div><dt className="sr-only">Leaders</dt><dd><span className="text-2xl font-extrabold"><CountUp value={core.length + advisory.length + leaders.length} /></span> <span className="text-stone-400">leaders</span></dd></div>
             </dl>
           </div>
-          <HeroArt className="hidden w-full max-w-xl justify-self-end drop-shadow-2xl lg:block" />
+          <div className="relative hidden lg:block">
+            <div className="animate-glow pointer-events-none absolute -inset-10 rounded-full bg-can-orange/25 blur-3xl" />
+            <PhotoWall photos={wall} className="relative" />
+            <div className="animate-float absolute -left-10 bottom-16 flex items-center gap-3 rounded-2xl bg-white/95 p-3 pr-5 text-ink shadow-2xl">
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand text-white"><Icon name="users" /></span>
+              <span><span className="block text-lg font-extrabold leading-none">4,200+</span><span className="text-xs text-slate-500">IT partners across Gujarat</span></span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -67,7 +83,24 @@ export default async function Home() {
         </nav>
       </div>
 
-      <section id="associations" className="mx-auto max-w-7xl px-4 pt-16 sm:px-6">
+      {wall.length > 0 && (
+        <div className="mt-8 lg:hidden">
+          <Ticker>{wall.slice(0, 12).map((src) => <img key={src} src={src} alt="" className="h-36 w-28 rounded-2xl object-cover" />)}</Ticker>
+        </div>
+      )}
+
+      <section className="mx-auto max-w-7xl px-4 pt-12 sm:px-6" aria-label="Member associations">
+        <Ticker>
+          {associations.map((a) => (
+            <Link key={a.slug} href={`/associations/${a.slug}`} className="flex shrink-0 items-center gap-2 rounded-full border border-slate-200 bg-white py-1.5 pl-1.5 pr-4 text-sm shadow-card hover:border-brand-100">
+              <AssociationBadge code={a.code} slug={a.slug} />
+              <span><span className="block font-semibold text-slate-900">{a.code ?? a.city.name}</span><span className="block text-xs text-slate-500">{a.city.name}</span></span>
+            </Link>
+          ))}
+        </Ticker>
+      </section>
+
+      <section id="associations" className="mx-auto max-w-7xl px-4 pt-14 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-2">
           <div>
             <h2 className="text-2xl font-bold tracking-tight text-ink">Member associations by zone</h2>
@@ -88,27 +121,39 @@ export default async function Home() {
         </div>
       </section>
 
-      {core.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 pt-16 sm:px-6">
-          <div className="flex flex-wrap items-end justify-between gap-2">
-            <div>
-              <h2 className="text-2xl font-bold tracking-tight text-ink">Leadership</h2>
-              <p className="mt-1 text-sm text-slate-500">{parent?.shortName ?? 'FITAG'} core committee</p>
-            </div>
-            <Link href="/about#team" className="flex items-center gap-1 text-sm font-semibold text-brand">Full team <Icon name="arrowRight" className="h-4 w-4" /></Link>
-          </div>
-          <ul className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {core.map((t) => (
-              <li key={t.name} className="overflow-hidden rounded-2xl border border-slate-200 bg-white text-center shadow-card">
-                <img src={t.photo!} alt={t.name} loading="lazy" className="aspect-[4/5] w-full bg-gradient-to-b from-brand-50 to-white object-cover object-top" />
-                <div className="p-3"><p className="text-sm font-semibold text-slate-900">{t.name}</p><p className="text-xs text-brand-700">{t.role}</p>{t.city && <p className="text-xs text-slate-500">{t.city}</p>}</div>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      <section id="people" className="mt-16 bg-gradient-to-b from-white to-surface py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <Reveal>
+            <span className="text-xs font-bold uppercase tracking-widest text-can-orange">Our people</span>
+            <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-ink">The leaders behind the network</h2>
+            <p className="mt-2 max-w-2xl text-slate-600">{parent?.shortName ?? 'FITAG'}&apos;s core committee, past presidents and every city association&apos;s president and secretary — with their published contact details.</p>
+          </Reveal>
 
-      <section className="mx-auto max-w-7xl px-4 pt-16 sm:px-6">
+          {core.length > 0 && (
+            <div className="mt-10">
+              <h3 className="text-lg font-bold text-ink">Core committee</h3>
+              <div className="mt-4"><CoreCommittee team={core} /></div>
+            </div>
+          )}
+
+          {advisory.length > 0 && (
+            <div className="mt-14">
+              <h3 className="text-lg font-bold text-ink">Past presidents &amp; advisory committee</h3>
+              <div className="mt-4"><AdvisoryCommittee team={advisory} /></div>
+            </div>
+          )}
+
+          {leaders.length > 0 && (
+            <div className="mt-14">
+              <h3 className="text-lg font-bold text-ink">City presidents &amp; secretaries</h3>
+              <p className="mt-1 text-sm text-slate-500">{leaders.length} office bearers across {leaderZones.length} zones. Choose a zone or search.</p>
+              <div className="mt-4"><LeadersDirectory leaders={leaders} zones={leaderZones} /></div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pt-4 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-2">
           <div>
             <h2 className="text-2xl font-bold tracking-tight text-ink">Featured members</h2>

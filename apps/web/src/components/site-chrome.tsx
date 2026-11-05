@@ -9,6 +9,7 @@ export function Logo({ dark = false }: { dark?: boolean }) {
 export function CommunityNav() {
   const links = [
     ['Associations', '/associations'],
+    ['People', '/#people'],
     ['Stores', '/stores'],
     ['Events', '/events'],
     ['Service centres', '/service-centres'],

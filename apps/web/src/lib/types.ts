@@ -43,9 +43,12 @@ export interface Association {
 export interface AssociationDetail extends Association {
   members: { id: string; name: string; slug: string; isVerified: boolean; websiteStatus: string; area: { name: string } }[];
 }
-export interface TeamMember { section: string; photo: string | null; name: string; role: string | null; city: string | null }
+export interface TeamMember { section: string; photo: string | null; name: string; role: string | null; city: string | null; years?: string | null; phone?: string | null; email?: string | null }
+export interface Leader { post: string; name: string; zone: string | null; association: string | null; code: string | null; associationSlug: string | null; phone: string | null; email: string | null; photo: string | null }
 export interface Network {
   team: TeamMember[];
+  leaders: Leader[];
+  photoWall: string[];
   events: { slug: string; title: string; images: string[] }[];
   gallery: { caption: string; images: string[] }[];
   serviceCentres: { brand: string; address: string; phone: string; email: string; tollFree: string; hours: string }[];
