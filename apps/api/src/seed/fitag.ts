@@ -70,7 +70,21 @@ export const FITAG_NETWORK: NetworkCity[] = [
 
 export const ZONE_ORDER = ['Central Zone 1', 'Central Zone 2', 'South Zone', 'Saurashtra Zone', 'North Zone', 'Kutch Zone'];
 
-/** Parent-body profile shown on the community About page (published by FITAG). */
+import fitagData from './fitag-data.json';
+
+/** Scraped from fitag.in (WordPress API): associations, team, events, gallery, service centres, links. */
+export interface FitagAssociation { slug: string; name: string; code: string | null; zone: string; city: string; officeBearers: { post: string; name: string; firm: string | null }[]; firms: string[]; source: string }
+export const FITAG_DATA = fitagData as unknown as {
+  associations: FitagAssociation[];
+  team: { section: string; photo: string | null; name: string; role: string | null; city: string | null }[];
+  events: { slug: string; title: string; images: string[] }[];
+  gallery: { caption: string; images: string[] }[];
+  serviceCentres: { brand: string; address: string; phone: string; email: string; tollFree: string; hours: string }[];
+  usefulLinks: { group: string; links: { label: string; url: string }[] }[];
+  contacts: { label: string; email: string }[];
+};
+
+/** Parent-body profile shown on the community website (published by FITAG). */
 export const FITAG_PROFILE = {
   name: 'FITAG — Federation of Information Technology Associations of Gujarat',
   shortName: 'FITAG',
@@ -84,23 +98,13 @@ export const FITAG_PROFILE = {
     { title: 'Strength', text: 'To stay united and utilise the strength of the whole fraternity.' },
     { title: 'Protection', text: 'To protect the common interest of members.' },
   ],
-  committee: [
-    { name: 'Mr. Alpesh Ghevariya', role: 'President' },
-    { name: 'Mr. Varun Amin', role: 'General Secretary' },
-    { name: 'Mr. Sanjay Patoliya', role: 'General Secretary' },
-    { name: 'Mr. Ravi Dave', role: 'Treasurer' },
-    { name: 'Mr. Alok Ghelani', role: 'Immediate Past President' },
+  objectives: [
+    'Protect and promote the interest of the IT business community',
+    'Promote honourable trade practices and prevent malpractices',
+    'Represent the fraternity to local, state and central authorities',
+    'Advance commercial and technical education for members',
+    'Resolve trade disputes through arbitration and a code of conduct',
   ],
-  contacts: [
-    { label: 'President', email: 'president@fitag.in' },
-    { label: 'General Secretary', email: 'secretary@fitag.in' },
-  ],
+  committee: FITAG_DATA.team.filter((t) => t.section === 'Core Committee').slice(0, 5).map((t) => ({ name: t.name, role: t.role ?? '' })),
+  contacts: FITAG_DATA.contacts,
 };
-
-/** Member firms of the Computer Association of Nadiad, as listed by FITAG (names only). */
-export const CAN_NADIAD_FIRMS = [
-  'Rashesh Computer', 'Yashvi System', 'Key Solution', 'Atulya Techno System', 'Perfect Computer Kheda', 'Rhythm Service',
-  'Irshadi Computer', 'P.Raj Services', 'Pr Enterprise', 'Soni Computer System', 'Tech Com System', 'Perfect Computer',
-  'Sai Infotech', 'Deep Solutions', 'H D Infotech', 'Paragon Service', 'Nilkanth Computer Solution', 'Shreeji Enterprise',
-  'Hari Om Computer', 'Tarang Enterprise', 'Jay Maharaj Computer', 'Krishna Computers', 'Kailash Infotech', 'A Tech Kheda', 'Hariom Enterprise',
-];

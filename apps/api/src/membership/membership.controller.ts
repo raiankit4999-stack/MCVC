@@ -17,6 +17,7 @@ export const ApplicationSchema = z.object({
   addressLine: z.string().trim().min(5).max(300),
   cityId: uuid,
   areaId: uuid,
+  associationId: uuid.optional(),
   categoryIds: z.array(uuid).min(1).max(15),
   planId: uuid,
   documents: z.array(z.object({ type: z.string().max(50), url: z.url() })).max(10).default([]),
@@ -37,6 +38,10 @@ export class MembershipController {
 
     const area = await this.prisma.area.findFirst({ where: { id: body.areaId, cityId: body.cityId, city: { communityId: c.id } } });
     if (!area) throw new BadRequestException('Area does not belong to the selected city');
+    if (body.associationId) {
+      const assoc = await this.prisma.association.findFirst({ where: { id: body.associationId, communityId: c.id } });
+      if (!assoc) throw new BadRequestException('Unknown association');
+    }
     const [plan, cats] = await Promise.all([
       this.prisma.membershipPlan.findFirst({ where: { id: body.planId, communityId: c.id, isActive: true } }),
       this.prisma.businessCategory.count({ where: { id: { in: body.categoryIds }, communityId: c.id } }),
@@ -49,6 +54,6 @@ export class MembershipController {
 
   @Get('applications/mine')
   mine(@CurrentUser() user: AuthUser) {
-    return this.prisma.membershipApplication.findMany({ where: { applicantId: user.id }, orderBy: { createdAt: 'desc' }, include: { plan: { select: { name: true } } } });
+    return this.prisma.membershipApplication.findMany({ where: { applicantId: user.id }, orderBy: { createdAt: 'desc' }, include: { plan: { select: { name: true } }, association: { select: { name: true, code: true } } } });
   }
 }

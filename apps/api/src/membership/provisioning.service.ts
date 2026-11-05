@@ -22,6 +22,7 @@ export class ProvisioningService {
         communityId: app.communityId,
         cityId: app.cityId,
         areaId: app.areaId,
+        associationId: app.associationId,
         name: app.businessName,
         slug,
         gstin: app.gstin,

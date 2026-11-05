@@ -97,7 +97,8 @@ GST rates, HSN/SAC codes and invoice formats are configuration supplied by each 
 ## Brand and network data
 
 - Brand: CAN logo (`apps/web/src/components/brand.tsx`, `app/icon.svg`); palette crimson `#C1272D`, orange `#F15A29`, amber `#F7941D`. Interactive orange is `#C2410C` (5.2:1 with white text).
-- FITAG network data (`apps/api/src/seed/fitag.ts`): member-association cities by zone, parent-body profile, and the Computer Association of Nadiad member firm names. These are applied on every API start (`bootstrap-platform`). Member listings carry names only; owners complete their own contact details by claiming the listing.
+- FITAG network data (`apps/api/src/seed/fitag-data.json`, extracted from fitag.in's public WordPress API): 42 member associations by zone with office bearers and 2,798 member firms, the FITAG team, events, gallery, brand service centres and useful links. Images are in `apps/web/public/fitag/`.
+- Seed logic (`apps/api/src/seed/fitag.ts`, `platform.ts`): member-association cities by zone, parent-body profile, and the Computer Association of Nadiad member firm names. These are applied on every API start (`bootstrap-platform`). Member listings carry names only; owners complete their own contact details by claiming the listing.
 - FITAG logo and banner (`apps/web/public/brand/`) are used with credit and a link to fitag.in.
 
 ## Local development

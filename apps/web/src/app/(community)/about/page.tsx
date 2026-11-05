@@ -2,13 +2,15 @@ import Link from 'next/link';
 import { CanMark } from '@/components/brand';
 import { Icon } from '@/components/icons';
 import { api } from '@/lib/server-api';
-import type { CommunityProfile } from '@/lib/types';
+import type { CommunityProfile, Network } from '@/lib/types';
 
 export const metadata = { title: 'About CAN & FITAG' };
 export const dynamic = 'force-dynamic';
 
 export default async function About() {
-  const community = await api<CommunityProfile>('/community');
+  const [community, network] = await Promise.all([api<CommunityProfile>('/community'), api<Network>('/community/network')]);
+  const core = network.team?.filter((t) => t.section === 'Core Committee') ?? [];
+  const advisory = network.team?.filter((t) => t.section === 'Advisory Committee') ?? [];
   const p = community.settings.parent;
   return (
     <>
@@ -62,17 +64,51 @@ export default async function About() {
 
           <img src="/brand/fitag-setu-banner.jpg" alt="FITAG Setu — Let's expand our horizon. Flourish, Knowledge, Networking, Strength, Protection." className="w-full rounded-3xl border border-slate-200" />
 
+          {p.objectives && (
+            <section>
+              <h2 className="text-2xl font-bold text-ink">Objectives</h2>
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                {p.objectives.map((o) => <li key={o} className="flex gap-3 rounded-xl bg-white p-4 text-sm text-slate-700 ring-1 ring-slate-200"><Icon name="check" className="h-5 w-5 shrink-0 text-can-orange" />{o}</li>)}
+              </ul>
+            </section>
+          )}
+
+          <section id="team">
+            <h2 className="text-2xl font-bold text-ink">Core committee</h2>
+            <ul className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+              {core.map((t) => (
+                <li key={t.name + t.role} className="overflow-hidden rounded-2xl border border-slate-200 bg-white text-center shadow-card">
+                  {t.photo ? <img src={t.photo} alt={t.name} loading="lazy" className="aspect-[4/5] w-full bg-gradient-to-b from-brand-50 to-white object-cover object-top" /> : <div className="grid aspect-[4/5] place-items-center bg-brand-50 text-2xl font-bold text-brand-700">{t.name.replace(/^Mr\.\s*/, '').split(' ').map((w) => w[0]).join('').slice(0, 2)}</div>}
+                  <div className="p-3"><p className="text-sm font-semibold text-slate-900">{t.name}</p><p className="text-xs text-brand-700">{t.role}</p>{t.city && <p className="text-xs text-slate-500">{t.city}</p>}</div>
+                </li>
+              ))}
+            </ul>
+            {advisory.length > 0 && (
+              <>
+                <h3 className="mt-10 text-lg font-bold text-ink">Advisory committee</h3>
+                <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                  {advisory.map((t) => (
+                    <li key={t.name} className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 ring-1 ring-slate-200">
+                      {t.photo ? <img src={t.photo} alt="" className="h-10 w-10 rounded-full object-cover object-top" /> : <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-50 text-xs font-bold text-brand-700">{t.name.replace(/^Mr\.\s*/, '').split(' ').map((w) => w[0]).join('').slice(0, 2)}</span>}
+                      <span className="text-sm"><span className="block font-medium text-slate-900">{t.name}</span>{t.city && <span className="text-xs text-slate-500">{t.city}</span>}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </section>
+
           <section className="grid gap-8 lg:grid-cols-2">
             <div>
-              <h2 className="text-2xl font-bold text-ink">FITAG active committee</h2>
-              <ul className="mt-4 divide-y divide-slate-100 rounded-2xl border border-slate-200 bg-white">
-                {p.committee.map((m) => (
-                  <li key={m.name + m.role} className="flex items-center gap-3 px-5 py-3">
-                    <span className="grid h-9 w-9 place-items-center rounded-full bg-brand-50 text-xs font-bold text-brand-700">{m.name.replace(/^Mr\.\s*/, '').split(' ').map((w) => w[0]).join('').slice(0, 2)}</span>
-                    <span><span className="block font-medium text-slate-900">{m.name}</span><span className="text-sm text-slate-500">{m.role}</span></span>
-                  </li>
+              <h2 className="text-2xl font-bold text-ink">Useful links</h2>
+              <div className="mt-4 space-y-4">
+                {network.usefulLinks?.map((g) => (
+                  <div key={g.group} className="rounded-2xl border border-slate-200 bg-white p-5">
+                    <h3 className="text-sm font-semibold text-slate-900">{g.group}</h3>
+                    <ul className="mt-2 space-y-1 text-sm">{g.links.map((l) => <li key={l.url}><a href={l.url} target="_blank" rel="noreferrer" className="text-brand hover:underline">{l.label}</a></li>)}</ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
             <div>
               <h2 className="text-2xl font-bold text-ink">Contact</h2>

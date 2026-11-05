@@ -7,6 +7,7 @@ process.env.DATABASE_URL = process.env.TEST_DATABASE_URL ?? 'postgresql://mcvc:m
 process.env.PLATFORM_DOMAIN = 'mcvc.test';
 process.env.DOMAIN_CNAME_TARGET = 'stores.mcvc.test';
 process.env.RATE_LIMIT_DISABLED = 'true';
+process.env.IMPORT_MEMBER_LISTINGS = 'false';
 process.env.NOTIFICATIONS_WORKER = 'off';
 
 import { AppModule } from '../src/app.module';

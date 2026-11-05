@@ -280,3 +280,43 @@ describe('Milestone journey', () => {
     await http.post('/api/v1/auth/refresh').send({ refreshToken: r1.body.refreshToken }).expect(200);
   });
 });
+
+describe('Association network', () => {
+  let app: INestApplication;
+  let prisma: PrismaClient;
+  beforeAll(async () => {
+    ({ app, prisma } = await bootstrap());
+  });
+  afterAll(async () => {
+    await app.close();
+    await prisma.$disconnect();
+  });
+
+  it('seeds parent-body associations by zone and exposes them publicly', async () => {
+    const http = request(app.getHttpServer());
+    const list = await http.get('/api/v1/associations').expect(200);
+    expect(list.body.length).toBeGreaterThanOrEqual(40);
+    const can = list.body.find((a: { slug: string }) => a.slug === 'nadiad');
+    expect(can).toMatchObject({ code: 'CAN', zone: 'Central Zone 2', city: { slug: 'nadiad' } });
+    const detail = await http.get('/api/v1/associations/nadiad').expect(200);
+    expect(detail.body.officeBearers[0]).toMatchObject({ post: 'President' });
+    const network = await http.get('/api/v1/community/network').expect(200);
+    expect(network.body.team.length).toBeGreaterThan(10);
+    expect(network.body.serviceCentres.length).toBeGreaterThan(10);
+    const community = await http.get('/api/v1/community').expect(200);
+    expect(community.body.settings).not.toHaveProperty('network');
+    expect(community.body.stats.associations).toBe(list.body.length);
+  });
+
+  it('imports member listings once, names only', async () => {
+    const { importMemberListings } = await import('../../src/seed/platform');
+    const c = await prisma.community.findFirstOrThrow();
+    await importMemberListings(prisma, c.id);
+    const n = await prisma.store.count();
+    expect(n).toBeGreaterThan(2000);
+    const sample = await prisma.store.findFirstOrThrow({ where: { association: { slug: 'nadiad' } } });
+    expect(sample).toMatchObject({ phone: '', email: '', gstin: null, websiteStatus: 'DRAFT', ratingCount: 0 });
+    await importMemberListings(prisma, c.id);
+    expect(await prisma.store.count()).toBe(n);
+  });
+});

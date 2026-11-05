@@ -176,7 +176,7 @@ export class MasterController {
     };
     const [total, items] = await Promise.all([
       this.prisma.membershipApplication.count({ where }),
-      this.prisma.membershipApplication.findMany({ where, orderBy: { createdAt: 'desc' }, skip: (q.page - 1) * q.pageSize, take: q.pageSize, include: { plan: { select: { name: true } } } }),
+      this.prisma.membershipApplication.findMany({ where, orderBy: { createdAt: 'desc' }, skip: (q.page - 1) * q.pageSize, take: q.pageSize, include: { plan: { select: { name: true } }, association: { select: { name: true, code: true } } } }),
     ]);
     const cities = await this.prisma.city.findMany({ where: { id: { in: items.map((i) => i.cityId) } }, select: { id: true, name: true } });
     const areas = await this.prisma.area.findMany({ where: { id: { in: items.map((i) => i.areaId) } }, select: { id: true, name: true } });
@@ -236,6 +236,7 @@ export class MasterController {
         include: {
           city: { select: { name: true } },
           area: { select: { name: true } },
+          association: { select: { code: true, name: true } },
           subscriptions: { orderBy: { createdAt: 'desc' }, take: 1, include: { plan: { select: { name: true } } } },
           domains: { select: { hostname: true, verificationStatus: true, isPrimary: true } },
         },

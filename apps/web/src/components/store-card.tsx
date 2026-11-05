@@ -25,7 +25,9 @@ export function StoreCard({ store }: { store: S }) {
           </p>
         </div>
       </div>
-      {store.tagline && <p className="mt-3 line-clamp-2 text-sm text-slate-600">{store.tagline}</p>}
+      {store.association ? (
+        <p className="mt-3 line-clamp-1 text-xs font-medium text-brand-700">Member · {store.association.name}{store.association.code ? ` (${store.association.code})` : ''}</p>
+      ) : store.tagline && <p className="mt-3 line-clamp-2 text-sm text-slate-600">{store.tagline}</p>}
       <div className="mt-3 flex flex-wrap gap-1.5">
         {store.categories.slice(0, 3).map((c) => (
           <Badge key={c.slug} tone={c.kind === 'SERVICE' ? 'slate' : 'orange'}>{c.name}</Badge>

@@ -38,11 +38,14 @@ export default async function StoreProfile({ params }: { params: Promise<{ slug:
             <span className="grid h-16 w-16 place-items-center rounded-2xl text-2xl font-bold text-white" style={{ background: s.primaryColor }}>{s.name[0]}</span>
             <div>
               <h1 className="flex items-center gap-2 text-2xl font-bold text-ink">{s.name} {s.isVerified && <Badge tone="blue"><Icon name="shield" className="h-3.5 w-3.5" /> Verified</Badge>}</h1>
-              {s.tagline && <p className="text-slate-600">{s.tagline}</p>}
+              {s.association ? <Link href={`/associations/${s.association.slug}`} className="text-sm font-medium text-brand-700 hover:underline">Member · {s.association.name}{s.association.code ? ` (${s.association.code})` : ''}</Link> : s.tagline && <p className="text-slate-600">{s.tagline}</p>}
               {s.ratingCount > 0 && <p className="mt-1 flex items-center gap-1 text-sm text-slate-500"><Icon name="star" className="h-4 w-4 fill-amber-400 text-amber-400" /> {s.rating.toFixed(1)} · {s.ratingCount} reviews</p>}
             </div>
           </div>
           {s.about && <p className="mt-6 max-w-3xl text-slate-700">{s.about}</p>}
+          {!s.websitePublished && s.association && !s.phone && (
+            <p className="mt-6 max-w-2xl rounded-xl bg-brand-50 px-4 py-3 text-sm text-brand-700">This listing is from the {s.association.code ?? 'association'} member list. Are you the owner? <Link href={`/join?association=${s.association.slug}`} className="font-semibold underline">Claim it on CAN</Link> to add products, services, contact details and your own website.</p>
+          )}
           <div className="mt-4 flex flex-wrap gap-1.5">{s.categories.map((c) => <Badge key={c.slug} tone={c.kind === 'SERVICE' ? 'slate' : 'orange'}>{c.name}</Badge>)}</div>
 
           {s.services.length > 0 && (

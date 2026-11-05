@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Icon } from '@/components/icons';
 import { StoreCard } from '@/components/store-card';
 import { api } from '@/lib/server-api';
-import type { Area, Category, City, StoreCard as S } from '@/lib/types';
+import type { Area, Association, Category, City, StoreCard as S } from '@/lib/types';
 import { SearchBar } from '../search-bar';
 
 export const dynamic = 'force-dynamic';
@@ -19,6 +19,7 @@ export default async function Stores({ searchParams }: { searchParams: Promise<S
     sp.city ? api<Area[]>(`/areas?city=${encodeURIComponent(sp.city)}`) : Promise.resolve([] as Area[]),
     api<{ total: number; page: number; pageSize: number; items: S[] }>(`/stores?${qs}`, { revalidate: 0 }),
   ]);
+  const association = sp.association ? (await api<Association[]>('/associations')).find((a) => a.slug === sp.association) : undefined;
   const toggle = (k: string, v: string) => {
     const n = new URLSearchParams(qs);
     if (n.get(k) === v) n.delete(k);
@@ -32,7 +33,7 @@ export default async function Stores({ searchParams }: { searchParams: Promise<S
     <div>
       <div className="hero-bg px-4 pb-10 pt-10 sm:px-6">
         <div className="mx-auto max-w-7xl">
-          <h1 className="text-3xl font-bold text-white">{city ? `Computer stores in ${city.name}` : 'Find computer stores & IT services'}</h1>
+          <h1 className="text-3xl font-bold text-white">{association ? `Members of ${association.name}` : city ? `Computer stores in ${city.name}` : 'Find computer stores & IT services'}</h1>
           {city?.associationName && <p className="mt-1 text-sm text-stone-300">Local association: {city.associationName}{city.associationCode ? ` (${city.associationCode})` : ''} · {city.zone}</p>}
           <div className="mt-6"><SearchBar cities={cities} categories={categories} defaults={sp} /></div>
         </div>

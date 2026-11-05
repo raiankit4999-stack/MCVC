@@ -18,11 +18,41 @@ export class CommunityService {
 
   async publicProfile() {
     const c = await this.current();
-    const [stores, cities] = await Promise.all([
+    const [stores, cities, associations] = await Promise.all([
       this.prisma.store.count({ where: { communityId: c.id, membershipStatus: 'ACTIVE', deletedAt: null } }),
       this.prisma.city.count({ where: { communityId: c.id, isActive: true } }),
+      this.prisma.association.count({ where: { communityId: c.id } }),
     ]);
-    return { id: c.id, name: c.name, slug: c.slug, tagline: c.tagline, logoUrl: c.logoUrl, settings: c.settings, stats: { stores, cities } };
+    const { network: _network, ...settings } = (c.settings ?? {}) as Record<string, unknown>;
+    return { id: c.id, name: c.name, slug: c.slug, tagline: c.tagline, logoUrl: c.logoUrl, settings, stats: { stores, cities, associations } };
+  }
+
+  /** Parent-body content: team, events, gallery, service centres, useful links. */
+  async network() {
+    const c = await this.current();
+    return ((c.settings ?? {}) as Record<string, unknown>).network ?? {};
+  }
+
+  async associations(zone?: string) {
+    const c = await this.current();
+    const list = await this.prisma.association.findMany({
+      where: { communityId: c.id, ...(zone ? { zone } : {}) },
+      orderBy: { sortOrder: 'asc' },
+      include: { city: { select: { name: true, slug: true } }, _count: { select: { stores: { where: { deletedAt: null, membershipStatus: 'ACTIVE' } } } } },
+    });
+    return list.map(({ _count, ...a }) => ({ ...a, memberCount: _count.stores }));
+  }
+
+  async association(slug: string) {
+    const c = await this.current();
+    const a = await this.prisma.association.findFirst({ where: { communityId: c.id, slug }, include: { city: { select: { name: true, slug: true, stateCode: true } } } });
+    if (!a) throw new NotFoundException('Association not found');
+    const members = await this.prisma.store.findMany({
+      where: { associationId: a.id, deletedAt: null, membershipStatus: 'ACTIVE' },
+      orderBy: [{ websiteStatus: 'desc' }, { isVerified: 'desc' }, { name: 'asc' }],
+      select: { id: true, name: true, slug: true, isVerified: true, websiteStatus: true, area: { select: { name: true } } },
+    });
+    return { ...a, memberCount: members.length, members };
   }
 
   async cities() {
@@ -88,6 +118,7 @@ export class CommunityService {
       deletedAt: null,
       ...(q.city ? { city: { slug: q.city } } : {}),
       ...(q.area ? { area: { slug: q.area } } : {}),
+      ...(q.association ? { association: { slug: q.association } } : {}),
       ...(q.category ? { categories: { some: { category: { slug: q.category } } } } : {}),
       ...(q.verified ? { isVerified: true } : {}),
       ...(q.minRating ? { ratingAverage: { gte: q.minRating } } : {}),
@@ -113,7 +144,7 @@ export class CommunityService {
     const c = await this.current();
     const stores = await this.prisma.store.findMany({
       where: { communityId: c.id, membershipStatus: 'ACTIVE', deletedAt: null },
-      orderBy: [{ isFeatured: 'desc' }, { ratingAverage: 'desc' }],
+      orderBy: [{ isFeatured: 'desc' }, { websiteStatus: 'desc' }, { ratingAverage: 'desc' }, { createdAt: 'asc' }],
       take: 6,
       include: STORE_CARD_INCLUDE,
     });
@@ -152,6 +183,7 @@ export interface DirectoryQuery {
   city?: string;
   area?: string;
   category?: string;
+  association?: string;
   product?: string;
   service?: string;
   verified?: boolean;
@@ -167,6 +199,7 @@ const STORE_CARD_INCLUDE = {
   settings: true,
   categories: { include: { category: { select: { name: true, slug: true, kind: true } } } },
   domains: { where: { isPrimary: true, verificationStatus: 'VERIFIED' as const }, select: { hostname: true } },
+  association: { select: { name: true, code: true, slug: true } },
 } satisfies Prisma.StoreInclude;
 
 type StoreWithCard = Prisma.StoreGetPayload<{ include: typeof STORE_CARD_INCLUDE }>;
@@ -191,5 +224,6 @@ function toStoreCard(s: StoreWithCard) {
     websitePublished: s.websiteStatus === 'PUBLISHED',
     primaryDomain: s.domains[0]?.hostname ?? null,
     isOpen: isOpenNow(s.settings?.businessHours, s.timezone),
+    association: s.association,
   };
 }

@@ -11,6 +11,7 @@ const DirectorySchema = z.object({
   city: z.string().max(80).optional(),
   area: z.string().max(80).optional(),
   category: z.string().max(80).optional(),
+  association: z.string().max(80).optional(),
   product: z.string().trim().min(2).max(80).optional(),
   service: z.string().trim().min(2).max(80).optional(),
   verified: bool.optional(),
@@ -49,6 +50,21 @@ export class CommunityController {
   @Get('membership/plans')
   plans() {
     return this.community.plans();
+  }
+
+  @Get('community/network')
+  network() {
+    return this.community.network();
+  }
+
+  @Get('associations')
+  associations(@ZQuery(z.object({ zone: z.string().max(40).optional() })) q: { zone?: string }) {
+    return this.community.associations(q.zone);
+  }
+
+  @Get('associations/:slug')
+  association(@Param('slug') slug: string) {
+    return this.community.association(slug);
   }
 
   @Get('stores')

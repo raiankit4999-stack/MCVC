@@ -1,12 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { FormEvent, useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { FormEvent, Suspense, useEffect, useMemo, useState } from 'react';
 import { Icon } from '@/components/icons';
 import { Alert, Badge, Button, Card, Field, Input, Select, StatusBadge } from '@/components/ui';
 import { apiFetch, errorText } from '@/lib/client-api';
 import { money } from '@/lib/format';
-import type { Area, Category, City, Plan } from '@/lib/types';
+import type { Area, Association, Category, City, Plan } from '@/lib/types';
 
 interface Application { id: string; businessName: string; status: string; createdAt: string; reviewNote: string | null; plan: { name: string } }
 
@@ -47,7 +48,7 @@ export default function JoinPage() {
         ) : apps.length ? (
           <ApplicationStatus apps={apps} hasStore={me.memberships.length > 0} />
         ) : (
-          <ApplicationForm onDone={loadMe} defaults={me} />
+          <Suspense><ApplicationForm onDone={loadMe} defaults={me} /></Suspense>
         )}
       </div>
     </div>
@@ -91,6 +92,9 @@ function ApplicationForm({ onDone, defaults }: { onDone: () => void; defaults: {
   const [city, setCity] = useState('');
   const [selected, setSelected] = useState<string[]>([]);
   const [plan, setPlan] = useState('');
+  const [associations, setAssociations] = useState<Association[]>([]);
+  const [association, setAssociation] = useState('');
+  const preset = useSearchParams().get('association');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -101,7 +105,15 @@ function ApplicationForm({ onDone, defaults }: { onDone: () => void; defaults: {
       setPlans(p);
       setPlan(p[1]?.id ?? p[0]?.id ?? '');
     });
+    void apiFetch<Association[]>('/associations', { store: false }).then(setAssociations);
   }, []);
+  // Pre-select association (and its city) when arriving from an association page.
+  useEffect(() => {
+    const a = associations.find((x) => x.slug === preset);
+    const c = a && cities.find((x) => x.slug === a.city.slug);
+    if (a && c) { setAssociation(a.id); setCity(c.id); }
+  }, [preset, associations, cities]);
+  const cityAssociations = associations.filter((a) => a.city.slug === cities.find((c) => c.id === city)?.slug);
   useEffect(() => {
     const c = cities.find((x) => x.id === city);
     if (c) void apiFetch<Area[]>(`/areas?city=${c.slug}`, { store: false }).then(setAreas);
@@ -114,7 +126,7 @@ function ApplicationForm({ onDone, defaults }: { onDone: () => void; defaults: {
     setBusy(true);
     setError('');
     try {
-      await apiFetch('/membership/applications', { method: 'POST', store: false, body: { ...f, gstin: f.gstin || undefined, cityId: city, categoryIds: selected, planId: plan } });
+      await apiFetch('/membership/applications', { method: 'POST', store: false, body: { ...f, gstin: f.gstin || undefined, cityId: city, associationId: association || undefined, categoryIds: selected, planId: plan } });
       onDone();
     } catch (err) {
       setError(errorText(err));
@@ -137,6 +149,12 @@ function ApplicationForm({ onDone, defaults }: { onDone: () => void; defaults: {
             <Select value={city} onChange={(e) => setCity(e.target.value)} required>
               <option value="">Select city</option>
               {cities.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+            </Select>
+          </Field>
+          <Field label="Your association" hint="The local IT association you are a member of">
+            <Select value={association} onChange={(e) => setAssociation(e.target.value)} disabled={!city}>
+              <option value="">{cityAssociations.length ? 'Select association' : 'Not a member / other'}</option>
+              {cityAssociations.map((a) => <option key={a.id} value={a.id}>{a.name}{a.code ? ` (${a.code})` : ''}</option>)}
             </Select>
           </Field>
           <Field label="Area / locality">

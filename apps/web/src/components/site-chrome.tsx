@@ -8,12 +8,11 @@ export function Logo({ dark = false }: { dark?: boolean }) {
 
 export function CommunityNav() {
   const links = [
-    ['Home', '/'],
+    ['Associations', '/associations'],
     ['Stores', '/stores'],
-    ['Repair & Services', '/stores?category=laptop-repair'],
-    ['Cities', '/#cities'],
+    ['Events', '/events'],
+    ['Service centres', '/service-centres'],
     ['About', '/about'],
-    ['Become a Member', '/join'],
   ];
   return (
     <header className="sticky top-0 z-30 border-b border-slate-200/70 bg-white/90 backdrop-blur">
@@ -56,7 +55,9 @@ export function CommunityFooter() {
           <h3 className="text-sm font-semibold text-white">Discover</h3>
           <ul className="mt-3 space-y-2 text-sm">
             <li><Link href="/stores" className="hover:text-white">All stores</Link></li>
-            <li><Link href="/stores?category=laptop-repair" className="hover:text-white">Laptop repair</Link></li>
+            <li><Link href="/associations" className="hover:text-white">Associations</Link></li>
+            <li><Link href="/events" className="hover:text-white">Events &amp; gallery</Link></li>
+            <li><Link href="/service-centres" className="hover:text-white">Service centres</Link></li>
             <li><Link href="/stores?verified=true" className="hover:text-white">Verified members</Link></li>
             <li><Link href="/about" className="hover:text-white">About CAN &amp; FITAG</Link></li>
           </ul>
