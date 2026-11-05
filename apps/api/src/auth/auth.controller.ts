@@ -39,7 +39,8 @@ export class AuthController {
   }
 
   @Public()
-  @Throttle({ default: { limit: 10, ttl: 60_000 } })
+  // Per IP: high enough for a room of people on one Wi-Fi; argon2id keeps guessing slow anyway.
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   @HttpCode(200)
   @Post('login')
   @ApiZodBody(LoginSchema)
