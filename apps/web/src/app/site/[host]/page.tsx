@@ -32,10 +32,10 @@ export default async function StoreHome({ params }: { params: Promise<{ host: st
   return (
     <>
       <section className="relative overflow-hidden text-white" style={{ background: `radial-gradient(60% 80% at 80% 40%, color-mix(in srgb, var(--brand) 55%, transparent), transparent 70%), linear-gradient(120deg, #1C1917, #292524 60%, color-mix(in srgb, var(--brand) 35%, #292524))` }}>
-        <div className="mx-auto grid max-w-7xl items-center gap-8 px-6 pb-24 pt-16 lg:grid-cols-2">
+        <div className="mx-auto grid grid-cols-1 max-w-7xl items-center gap-8 px-5 pb-20 pt-10 sm:px-6 sm:pb-24 sm:pt-16 lg:grid-cols-2">
           <div>
             {s.branding.tagline && <span className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium ring-1 ring-white/20">{s.branding.tagline}</span>}
-            <h1 className="mt-5 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">{s.branding.heroHeadline ?? s.name}</h1>
+            <h1 className="mt-5 text-[2rem] font-extrabold leading-tight tracking-tight sm:text-5xl">{s.branding.heroHeadline ?? s.name}</h1>
             <p className="mt-4 max-w-lg text-lg text-slate-300">Buy, repair &amp; upgrade — all in one place in {s.city}.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href={`${base}/products`} className="inline-flex h-12 items-center gap-2 rounded-lg px-6 font-semibold text-white" style={{ background: 'var(--brand)' }}>Shop now <Icon name="arrowRight" className="h-4 w-4" /></Link>
@@ -46,9 +46,9 @@ export default async function StoreHome({ params }: { params: Promise<{ host: st
         </div>
       </section>
       <div className="relative z-10 mx-auto -mt-12 max-w-6xl px-4">
-        <ul className="grid grid-cols-2 gap-4 rounded-2xl bg-white p-5 shadow-xl ring-1 ring-black/5 md:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-4 rounded-2xl bg-white p-4 shadow-xl ring-1 ring-black/5 sm:p-5 md:grid-cols-4">
           {TRUST.map(([i, t, d]) => (
-            <li key={t} className="flex items-center gap-3"><Icon name={i} className="h-8 w-8 shrink-0" style={{ color: 'var(--brand)' }} /><span><span className="block text-sm font-semibold text-slate-900">{t}</span><span className="text-xs text-slate-500">{d}</span></span></li>
+            <li key={t} className="flex items-center gap-2.5 sm:gap-3"><Icon name={i} className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" style={{ color: 'var(--brand)' }} /><span><span className="block text-sm font-semibold text-slate-900">{t}</span><span className="text-xs text-slate-500">{d}</span></span></li>
           ))}
         </ul>
       </div>
@@ -56,7 +56,7 @@ export default async function StoreHome({ params }: { params: Promise<{ host: st
       {services.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 pt-16">
           <div className="flex items-end justify-between"><h2 className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>Repair &amp; IT services</h2><Link href={`${base}/services`} className="text-sm font-semibold" style={{ color: 'var(--brand)' }}>All services →</Link></div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {services.slice(0, 4).map((v) => (
               <div key={v.id} className="rounded-2xl border border-slate-200 p-5">
                 <Icon name="wrench" className="h-7 w-7" style={{ color: 'var(--brand)' }} />
@@ -77,7 +77,7 @@ export default async function StoreHome({ params }: { params: Promise<{ host: st
         </section>
       )}
 
-      <section id="about" className="mx-auto mt-16 grid max-w-7xl gap-8 px-6 lg:grid-cols-2">
+      <section id="about" className="mx-auto mt-16 grid grid-cols-1 max-w-7xl gap-8 px-6 lg:grid-cols-2">
         <div>
           <h2 className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>About {s.name}</h2>
           <p className="mt-3 whitespace-pre-line text-slate-600">{s.branding.about ?? `${s.name} is a computer store in ${s.area}, ${s.city}.`}</p>

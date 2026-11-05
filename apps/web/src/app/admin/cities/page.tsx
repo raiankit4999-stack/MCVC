@@ -21,7 +21,7 @@ export default function Cities() {
     <>
       <PageHeader title="Cities & areas" subtitle="Locations used for store enrolment, discovery and manager scope." />
       {error && <div className="mb-4"><Alert>{error}</Alert></div>}
-      <div className="grid gap-6 xl:grid-cols-[1fr_340px]">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1fr_340px]">
         <div className="space-y-4">
           {data?.map((c) => (
             <Card key={c.id} title={<span className="flex items-center gap-2">{c.name} <span className="font-normal text-slate-500">{c.zone ?? c.state} · GST {c.stateCode}{c.associationCode ? ` · ${c.associationCode}` : ''}</span> <Badge>{c._count.stores} stores</Badge></span>}>

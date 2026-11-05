@@ -58,9 +58,9 @@ export default function ErpDashboard() {
       </div>
 
       {!d.data ? (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">{[0, 1, 2, 3, 4].map((i) => <Skeleton key={i} className="h-[76px]" />)}</div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">{[0, 1, 2, 3, 4].map((i) => <Skeleton key={i} className="h-[76px]" />)}</div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
           <Stat icon="chart" label="Revenue this month" value={compactInr(d.data.monthlyRevenue)} tone="blue" />
           <Stat icon="receipt" label={`Today's sales · ${d.data.todaySales.count} invoices`} value={compactInr(d.data.todaySales.amount)} tone="violet" />
           <Stat icon="wrench" label="Active repair jobs" value={d.data.activeRepairJobs} tone="amber" />
@@ -69,7 +69,7 @@ export default function ErpDashboard() {
         </div>
       )}
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-[2fr_1fr]">
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[2fr_1fr]">
         <Card title="Sales — last 30 days">
           <div className="p-4">{d.data ? <SalesArea data={d.data.chart} /> : <Skeleton className="h-64" />}</div>
         </Card>
@@ -78,7 +78,7 @@ export default function ErpDashboard() {
         </Card>
       </div>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-[3fr_2fr]">
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[3fr_2fr]">
         <Card title="Recent repair jobs" action={<Link href="/erp/repairs" className="text-xs font-semibold text-brand">All jobs</Link>}>
           {jobs.data?.items.length ? (
             <Table head={['Job', 'Customer', 'Device', 'Issue', 'Status']}>
@@ -114,7 +114,7 @@ export default function ErpDashboard() {
       </div>
 
       {d.data && (
-        <div className="mt-6 grid gap-6 xl:grid-cols-[3fr_2fr]">
+        <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[3fr_2fr]">
           <Card title="Recent transactions" action={<Link href="/erp/invoices" className="text-xs font-semibold text-brand">Invoices</Link>}>
             {d.data.recentTransactions.length ? (
               <Table head={['Number', 'Customer', 'Total', 'Payment']}>

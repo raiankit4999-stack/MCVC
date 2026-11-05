@@ -28,18 +28,8 @@ export default async function Stores({ searchParams }: { searchParams: Promise<S
     return `/stores?${n}`;
   };
   const city = cities.find((c) => c.slug === sp.city);
-
-  return (
-    <div>
-      <div className="hero-bg px-4 pb-10 pt-10 sm:px-6">
-        <div className="mx-auto max-w-7xl">
-          <h1 className="text-3xl font-bold text-white">{association ? `Members of ${association.name}` : city ? `Computer stores in ${city.name}` : 'Find computer stores & IT services'}</h1>
-          {city?.associationName && <p className="mt-1 text-sm text-stone-300">Local association: {city.associationName}{city.associationCode ? ` (${city.associationCode})` : ''} · {city.zone}</p>}
-          <div className="mt-6"><SearchBar cities={cities} categories={categories} defaults={sp} /></div>
-        </div>
-      </div>
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[240px_1fr]">
-        <aside className="space-y-6 text-sm">
+  const filters = (
+    <>
           {areas.length > 0 && (
             <div>
               <h2 className="mb-2 font-semibold text-slate-900">Area</h2>
@@ -73,11 +63,28 @@ export default async function Stores({ searchParams }: { searchParams: Promise<S
             <h2 className="font-semibold text-slate-900">Product availability</h2>
             <input name="product" defaultValue={sp.product} placeholder="e.g. RTX 4060" className="h-9 w-full rounded-lg border-0 px-3 ring-1 ring-slate-200 focus:ring-2 focus:ring-brand" />
           </form>
-        </aside>
+    </>
+  );
+
+  return (
+    <div>
+      <div className="hero-bg px-4 pb-8 pt-8 sm:px-6 sm:pb-10 sm:pt-10">
+        <div className="mx-auto max-w-7xl">
+          <h1 className="text-2xl font-bold text-white sm:text-3xl">{association ? `Members of ${association.name}` : city ? `Computer stores in ${city.name}` : 'Find computer stores & IT services'}</h1>
+          {city?.associationName && <p className="mt-1 text-sm text-stone-300">Local association: {city.associationName}{city.associationCode ? ` (${city.associationCode})` : ''} · {city.zone}</p>}
+          <div className="mt-6"><SearchBar cities={cities} categories={categories} defaults={sp} /></div>
+        </div>
+      </div>
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 py-6 sm:px-6 sm:py-8 lg:grid-cols-[240px_1fr] lg:gap-8">
+        <details className="group rounded-2xl border border-slate-200 bg-white text-sm lg:hidden">
+          <summary className="flex h-12 cursor-pointer list-none items-center justify-between px-4 font-semibold text-slate-900">Filters<span className="text-slate-400 transition group-open:rotate-180">▾</span></summary>
+          <div className="space-y-6 border-t border-slate-100 p-4">{filters}</div>
+        </details>
+        <aside className="hidden space-y-6 text-sm lg:block">{filters}</aside>
         <section>
           <p className="mb-4 text-sm text-slate-500">{result.total} {result.total === 1 ? 'store' : 'stores'} found</p>
           {result.items.length ? (
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">{result.items.map((s) => <StoreCard key={s.id} store={s} />)}</div>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">{result.items.map((s) => <StoreCard key={s.id} store={s} />)}</div>
           ) : (
             <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-12 text-center">
               <p className="font-medium text-slate-900">No stores match these filters</p>

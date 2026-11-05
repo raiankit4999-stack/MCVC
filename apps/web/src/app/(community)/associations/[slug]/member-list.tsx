@@ -15,11 +15,11 @@ export function MemberList({ members }: { members: Member[] }) {
         <label className="relative w-full max-w-sm">
           <span className="sr-only">Search members</span>
           <Icon name="search" className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={`Search ${members.length} members`} className="h-9 w-full rounded-lg border-0 pl-9 pr-3 text-sm ring-1 ring-slate-200 focus:ring-2 focus:ring-brand" />
+          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={`Search ${members.length} members`} className="h-10 w-full rounded-lg border-0 pl-9 pr-3 text-base ring-1 sm:h-9 sm:text-sm ring-slate-200 focus:ring-2 focus:ring-brand" />
         </label>
         <span className="shrink-0 text-xs text-slate-500">{shown.length} shown</span>
       </div>
-      <ul className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+      <ul className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-3">
         {shown.map((m) => (
           <li key={m.id}>
             <Link href={`/stores/${m.slug}`} className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm hover:border-brand-100 hover:bg-brand-50">

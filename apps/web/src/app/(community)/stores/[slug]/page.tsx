@@ -32,7 +32,7 @@ export default async function StoreProfile({ params }: { params: Promise<{ slug:
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <nav className="text-xs text-slate-500"><Link href="/stores" className="hover:text-brand">Stores</Link> / <Link href={`/stores?city=${s.city.slug}`} className="hover:text-brand">{s.city.name}</Link> / {s.name}</nav>
-      <div className="mt-4 grid gap-8 lg:grid-cols-[1fr_340px]">
+      <div className="mt-4 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_340px]">
         <div>
           <div className="flex items-start gap-4">
             <span className="grid h-16 w-16 place-items-center rounded-2xl text-2xl font-bold text-white" style={{ background: s.primaryColor }}>{s.name[0]}</span>
@@ -51,7 +51,7 @@ export default async function StoreProfile({ params }: { params: Promise<{ slug:
           {s.services.length > 0 && (
             <section className="mt-10">
               <h2 className="text-lg font-semibold text-ink">Services</h2>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {s.services.map((v) => (
                   <div key={v.id} className="rounded-xl border border-slate-200 bg-white p-4">
                     <div className="flex justify-between gap-2"><p className="font-medium">{v.name}</p><p className="text-sm font-semibold text-ink">{v.priceIsStarting ? 'from ' : ''}{money(v.price, true)}</p></div>
@@ -64,7 +64,7 @@ export default async function StoreProfile({ params }: { params: Promise<{ slug:
           {s.products.length > 0 && (
             <section className="mt-10">
               <h2 className="text-lg font-semibold text-ink">Product catalogue</h2>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {s.products.map((p) => (
                   <div key={p.id} className="rounded-xl border border-slate-200 bg-white p-4">
                     <p className="line-clamp-2 font-medium">{p.name}</p>

@@ -18,13 +18,13 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
   return (
     <>
       <PageHeader title={p.name} subtitle={`${p.sku} · HSN ${p.hsnCode} · GST ${Number(p.gstRate)}%`} />
-      <div className="grid gap-4 sm:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
         {[['In stock', p.stockOnHand], ['Selling price', money(p.sellingPrice)], ['Purchase price', money(p.purchasePrice)], ['MRP', money(p.mrp)]].map(([l, v]) => (
           <Card key={l as string} className="p-4"><p className="text-xs text-slate-500">{l}</p><p className="text-xl font-semibold">{v}</p></Card>
         ))}
       </div>
-      {Object.keys(p.specs).length > 0 && <Card title="Specifications" className="mt-6"><dl className="grid gap-3 p-5 sm:grid-cols-3">{Object.entries(p.specs).map(([k, v]) => <div key={k}><dt className="text-xs text-slate-500">{label(k)}</dt><dd className="text-sm font-medium">{v}</dd></div>)}</dl></Card>}
-      <div className="mt-6 grid gap-6 xl:grid-cols-2">
+      {Object.keys(p.specs).length > 0 && <Card title="Specifications" className="mt-6"><dl className="grid grid-cols-1 gap-3 p-5 sm:grid-cols-3">{Object.entries(p.specs).map(([k, v]) => <div key={k}><dt className="text-xs text-slate-500">{label(k)}</dt><dd className="text-sm font-medium">{v}</dd></div>)}</dl></Card>}
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
         {p.isSerialized && (
           <Card title={`Serial numbers (${p.serials.length})`}>
             <Table head={['Serial', 'Status', 'Warranty until']}>

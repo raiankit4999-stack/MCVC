@@ -45,6 +45,7 @@ services:
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       SEED_DEMO: ${SEED_DEMO:-false}
+      DEMO_MODE: ${DEMO_MODE:-false}
       SEED_PASSWORD: ${SEED_PASSWORD:-}
     ports:
       - "127.0.0.1:${API_PORT:-4100}:4000"

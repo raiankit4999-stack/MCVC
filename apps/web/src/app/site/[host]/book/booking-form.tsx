@@ -56,7 +56,7 @@ export function BookingForm({ host, services, initialService }: { host: string; 
       <ol className="flex gap-4 text-xs font-medium">{STEPS.map((s, i) => <li key={s} className="flex items-center gap-2"><span className="grid h-6 w-6 place-items-center rounded-full text-white" style={{ background: i <= step ? 'var(--brand)' : '#cbd5e1' }}>{i + 1}</span><span className={i <= step ? 'text-slate-900' : 'text-slate-400'}>{s}</span></li>)}</ol>
       <fieldset>
         <legend className="mb-3 font-semibold">1. Select service</legend>
-        <div className="grid gap-2 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {services.map((s) => (
             <label key={s.id} className={`flex cursor-pointer items-center justify-between rounded-xl p-4 ring-1 ${service === s.id ? 'ring-2 ring-[var(--brand)]' : 'ring-slate-200'}`}>
               <span className="flex items-center gap-3"><input type="radio" name="service" checked={service === s.id} onChange={() => setService(s.id)} className="text-[var(--brand)]" />{s.name}</span>
@@ -81,7 +81,7 @@ export function BookingForm({ host, services, initialService }: { host: string; 
           ))}
         </div>
       </fieldset>
-      <fieldset className="grid gap-3 sm:grid-cols-2">
+      <fieldset className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <legend className="mb-3 font-semibold">3. Your details</legend>
         <input name="name" required placeholder="Full name" className="h-11 rounded-lg border-0 px-3 ring-1 ring-slate-200" />
         <input name="phone" required placeholder="Mobile number" inputMode="tel" className="h-11 rounded-lg border-0 px-3 ring-1 ring-slate-200" />

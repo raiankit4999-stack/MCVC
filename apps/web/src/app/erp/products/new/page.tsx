@@ -40,7 +40,7 @@ export default function NewProduct() {
     <form onSubmit={submit} className="max-w-4xl space-y-6">
       <PageHeader title="Add product" actions={<Button>Save product</Button>} />
       {error && <Alert>{error}</Alert>}
-      <Card title="Basics"><div className="grid gap-4 p-5 sm:grid-cols-3">
+      <Card title="Basics"><div className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-3">
         <Field label="Product name" className="sm:col-span-2"><Input name="name" required /></Field>
         <Field label="Category"><Input name="categoryName" placeholder="Laptops" list="cats" /></Field>
         <Field label="SKU"><Input name="sku" required /></Field>
@@ -51,7 +51,7 @@ export default function NewProduct() {
         <Field label="Warranty (months)"><Input name="warrantyMonths" type="number" min={0} defaultValue={12} /></Field>
         <Field label="Description" className="sm:col-span-3"><Textarea name="description" /></Field>
       </div></Card>
-      <Card title="Pricing & tax"><div className="grid gap-4 p-5 sm:grid-cols-3">
+      <Card title="Pricing & tax"><div className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-3">
         <Field label="MRP ₹"><Input name="mrp" type="number" step="0.01" min={0} required /></Field>
         <Field label="Purchase price ₹"><Input name="purchasePrice" type="number" step="0.01" min={0} required /></Field>
         <Field label="Selling price ₹ (excl. GST)"><Input name="sellingPrice" type="number" step="0.01" min={0} required /></Field>
@@ -59,7 +59,7 @@ export default function NewProduct() {
         <Field label="GST rate" hint="Rates enabled for your store — confirm with your tax adviser"><Select name="gstRate" defaultValue={rates.includes(18) ? 18 : rates[0]}>{rates.map((r) => <option key={r} value={r}>{r}%</option>)}</Select></Field>
         <Field label="Reorder level"><Input name="reorderLevel" type="number" min={0} defaultValue={2} /></Field>
       </div></Card>
-      <Card title="Computer specifications"><div className="grid gap-4 p-5 sm:grid-cols-3">
+      <Card title="Computer specifications"><div className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-3">
         {[['processor', 'Processor'], ['ram', 'RAM'], ['storage', 'Storage'], ['graphics', 'Graphics'], ['screenSize', 'Screen size'], ['os', 'Operating system']].map(([k, l]) => <Field key={k} label={l}><Input name={k} /></Field>)}
       </div></Card>
       <Card title="Stock"><div className="grid gap-4 p-5">

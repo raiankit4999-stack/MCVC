@@ -21,12 +21,12 @@ export default function CustomerProfile({ params }: { params: Promise<{ id: stri
   return (
     <>
       <PageHeader title={c.name} subtitle={<>{c.phone}{c.email && ` · ${c.email}`}{c.gstin && ` · GSTIN ${c.gstin}`} {c.stats.isRepeat && <Badge tone="green">Repeat customer</Badge>} {c.marketingConsent && <Badge tone="blue">Marketing consent</Badge>}</>} />
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <Stat icon="chart" label="Lifetime value" value={money(c.stats.lifetimeValue, true)} />
         <Stat icon="receipt" label="Outstanding" value={money(c.stats.outstanding, true)} tone="amber" />
         <Stat icon="wrench" label="Repair jobs" value={c.repairJobs.length} tone="violet" />
       </div>
-      <div className="mt-6 grid gap-6 xl:grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
         <Card title="Purchase & payment history">
           <Table head={['Number', 'Date', 'Total', 'Status']}>
             {c.invoices.map((i) => <tr key={i.id}><Td><Link className="text-brand" href={`/erp/invoices/${i.id}`}>{i.invoiceNumber}</Link> <span className="text-xs text-slate-500">{label(i.docType)}</span></Td><Td>{date(i.issuedAt)}</Td><Td>{money(i.grandTotal)}</Td><Td><StatusBadge status={i.status === 'CANCELLED' ? 'CANCELLED' : i.paymentStatus} /></Td></tr>)}

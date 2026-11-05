@@ -14,7 +14,7 @@ export default async function ProductPage({ params }: { params: Promise<{ host: 
   if (!p) notFound();
   const save = Number(p.mrp) - Number(p.sellingPrice);
   return (
-    <div className="mx-auto grid max-w-7xl gap-10 px-6 py-10 lg:grid-cols-2">
+    <div className="mx-auto grid grid-cols-1 max-w-7xl gap-10 px-6 py-10 lg:grid-cols-2">
       <div className="grid aspect-square place-items-center rounded-3xl bg-gradient-to-br from-slate-50 to-slate-100">
         {p.imageUrl ? <img src={p.imageUrl} alt={p.name} className="max-h-full rounded-3xl object-contain" /> : <Icon name="laptop" className="h-32 w-32 text-slate-300" />}
       </div>

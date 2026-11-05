@@ -7,6 +7,7 @@ import { APP_CONFIG, AppConfig } from '../config';
 import { ApiZodBody, ZBody } from '../common/zod';
 import { indianPhone } from '../common/validators';
 import { AuthService } from './auth.service';
+import { DEMO_ACCOUNTS, DEMO_PASSWORD, demoModeEnabled } from '../seed/demo-accounts';
 import { CSRF_HEADER } from './auth.guard';
 import { REFRESH_COOKIE, clearAuthCookies, setAuthCookies } from './cookies';
 import { CurrentUser, Public } from './decorators';
@@ -73,6 +74,14 @@ export class AuthController {
   async logoutAll(@CurrentUser() user: AuthUser, @Res({ passthrough: true }) res: Response) {
     await this.auth.logoutAll(user.id);
     clearAuthCookies(res);
+  }
+
+  /** Public list of demo logins — only when the server runs in demo mode. */
+  @Public()
+  @Get('demo-accounts')
+  demoAccounts() {
+    if (!demoModeEnabled()) return { enabled: false, accounts: [] };
+    return { enabled: true, password: DEMO_PASSWORD, accounts: DEMO_ACCOUNTS.map(({ email, label, description }) => ({ email, label, description })) };
   }
 
   @Get('me')

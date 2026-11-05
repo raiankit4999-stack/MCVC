@@ -57,9 +57,9 @@ export default function JobDetail({ params }: { params: Promise<{ id: string }> 
         </>
       } />
       {error && <div className="mb-4"><Alert>{error}</Alert></div>}
-      <div className="grid gap-6 xl:grid-cols-[1fr_360px]">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1fr_360px]">
         <div className="space-y-6">
-          <Card title="Device & problem"><dl className="grid gap-4 p-5 text-sm sm:grid-cols-2">
+          <Card title="Device & problem"><dl className="grid grid-cols-1 gap-4 p-5 text-sm sm:grid-cols-2">
             <div><dt className="text-xs text-slate-500">Customer</dt><dd className="font-medium"><Link className="text-brand" href={`/erp/customers/${job.customer.id}`}>{job.customer.name}</Link> · {job.customer.phone}</dd></div>
             <div><dt className="text-xs text-slate-500">Device</dt><dd className="font-medium">{job.device.category} — {job.device.brand} {job.device.model}</dd>{job.device.serialNumber && <dd className="text-xs text-slate-500">S/N {job.device.serialNumber}</dd>}</div>
             <div className="sm:col-span-2"><dt className="text-xs text-slate-500">Reported problem</dt><dd>{job.reportedProblem}</dd></div>

@@ -10,6 +10,33 @@
 html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+a, button, [role='button'], label, summary { touch-action: manipulation; }
+.pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+.mb-safe { margin-bottom: env(safe-area-inset-bottom); }
+
+/* Page content fades in on navigation */
+@keyframes page-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.page-in { animation: page-in .28s ease-out both; }
+@media (prefers-reduced-motion: reduce) { .page-in { animation: none; } }
+
+/* Tables become labelled cards on phones */
+@media (max-width: 639px) {
+  .rtable thead { display: none; }
+  .rtable, .rtable tbody, .rtable tr, .rtable td { display: block; width: 100%; }
+  .rtable tbody { border: 0; }
+  .rtable tr { padding: 10px 16px; border-bottom: 1px solid #f1f5f9; }
+  .rtable td { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; white-space: normal; text-align: right; }
+  .rtable td { min-width: 0; overflow-wrap: anywhere; }
+  .rtable td > * { min-width: 0; }
+  .rtable td[data-label]::before { content: attr(data-label); flex-shrink: 0; text-align: left; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: #94a3b8; padding-top: 2px; }
+  .rtable td:not([data-label]) { justify-content: flex-end; }
+  .rtable td:first-child { font-size: 15px; }
 }
 body {
   @apply bg-surface text-slate-800;

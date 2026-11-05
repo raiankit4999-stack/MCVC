@@ -35,7 +35,7 @@ export default async function AssociationPage({ params }: { params: Promise<{ sl
           </div>
         </div>
       </section>
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_320px]">
+      <div className="mx-auto grid grid-cols-1 max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_320px]">
         <section>
           <h2 className="text-lg font-bold text-ink">Member businesses</h2>
           {a.members.length ? <MemberList members={a.members} /> : <p className="mt-4 rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">The member list for this association will be published soon.</p>}

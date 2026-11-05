@@ -101,6 +101,20 @@ GST rates, HSN/SAC codes and invoice formats are configuration supplied by each 
 - Seed logic (`apps/api/src/seed/fitag.ts`, `platform.ts`): member-association cities by zone, parent-body profile, and the Computer Association of Nadiad member firm names. These are applied on every API start (`bootstrap-platform`). Member listings carry names only; owners complete their own contact details by claiming the listing.
 - FITAG logo and banner (`apps/web/public/brand/`) are used with credit and a link to fitag.in.
 
+## Demo accounts
+
+Created by the demo seed (`SEED_DEMO=true`) and shown as one-tap logins on `/login` when demo mode is on (`SEED_DEMO=true` or `DEMO_MODE=true`; always on in local development). Password for all: `CanDemo@2026`.
+
+| Login | Role |
+|---|---|
+| `admin@demo.can` | Community admin — approvals, cities, plans, stores |
+| `manager.nadiad@demo.can` | City manager, Nadiad only |
+| `owner@demo.can` | Store owner, TechWorld Computers (full ERP) |
+| `cashier@demo.can` | Cashier, TechWorld (POS, invoices, payments) |
+| `technician@demo.can` | Technician, TechWorld (repair jobs) |
+
+These are public credentials: use them only on a demo server, never on the live network.
+
 ## Local development
 
 Requirements: Node 22, pnpm 10, PostgreSQL 16.

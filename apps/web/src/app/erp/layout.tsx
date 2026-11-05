@@ -2,10 +2,24 @@
 
 import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
-import { NavSection, Shell } from '@/components/shell';
+import { NavItem, NavSection, Shell } from '@/components/shell';
 import { Select, Skeleton } from '@/components/ui';
 import { apiFetch, ClientApiError, getStoreId, setStoreId } from '@/lib/client-api';
 import { StoreCtx, StoreInfo } from './context';
+
+/** Permission needed to open each page (pages a role can't use are hidden from its menu). */
+const NEEDS: Record<string, string> = {
+  '/erp/pos': 'invoices.write', '/erp/invoices': 'invoices.read', '/erp/products': 'products.read', '/erp/inventory': 'inventory.read',
+  '/erp/repairs': 'repairs.read', '/erp/services': 'services.read', '/erp/customers': 'customers.read', '/erp/bookings': 'bookings.read',
+  '/erp/leads': 'leads.read', '/erp/reports': 'reports.view', '/erp/settings': 'settings.manage',
+};
+const TABS: NavItem[] = [
+  { label: 'Home', href: '/erp', icon: 'home' },
+  { label: 'Sale', href: '/erp/pos', icon: 'receipt' },
+  { label: 'Repairs', href: '/erp/repairs', icon: 'wrench' },
+  { label: 'Bookings', href: '/erp/bookings', icon: 'calendar' },
+  { label: 'Products', href: '/erp/products', icon: 'box' },
+];
 
 const NAV: NavSection[] = [
   { title: 'Overview', items: [{ label: 'Dashboard', href: '/erp', icon: 'home' }] },
@@ -46,7 +60,7 @@ export default function ErpLayout({ children }: { children: ReactNode }) {
     return (
       <div className="space-y-4 p-6 lg:pl-72">
         <Skeleton className="h-8 w-64" />
-        <div className="grid gap-4 sm:grid-cols-4">{[0, 1, 2, 3].map((i) => <Skeleton key={i} className="h-24" />)}</div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">{[0, 1, 2, 3].map((i) => <Skeleton key={i} className="h-24" />)}</div>
         <Skeleton className="h-72" />
       </div>
     );
@@ -54,9 +68,10 @@ export default function ErpLayout({ children }: { children: ReactNode }) {
   return (
     <StoreCtx.Provider value={{ store, reload: load }}>
       <Shell
+        tabs={TABS.filter((t) => !NEEDS[t.href] || store.permissions.includes(NEEDS[t.href])).slice(0, 4)}
         brand={store.name}
         brandSub={`${store.area.name}, ${store.city.name}`}
-        nav={NAV}
+        nav={NAV.map((sec) => ({ ...sec, items: sec.items.filter((i) => !NEEDS[i.href] || store.permissions.includes(NEEDS[i.href])) })).filter((sec) => sec.items.length)}
         user={{ name: me.name, role: `${store.role} · ${store.name}` }}
         topRight={
           me.memberships.length > 1 ? (

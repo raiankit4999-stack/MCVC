@@ -17,7 +17,7 @@ export default async function Events() {
       <div className="mx-auto max-w-7xl space-y-14 px-4 py-10 sm:px-6">
         <section>
           <h2 className="text-xl font-bold text-ink">Events 2026–28</h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {n.events.map((e) => (
               <article key={e.slug} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
                 {e.images[0] ? <img src={e.images[0]} alt="" className="aspect-[4/3] w-full object-cover" /> : <div className="grid aspect-[4/3] place-items-center bg-gradient-to-br from-can-red via-can-orange to-can-amber text-center text-lg font-extrabold text-white"><span className="px-4">{e.title}</span></div>}
@@ -34,7 +34,7 @@ export default async function Events() {
         </section>
         <section>
           <h2 className="text-xl font-bold text-ink">Association programmes</h2>
-          <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {n.gallery.map((g) => (
               <figure key={g.caption} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
                 <div className="grid grid-cols-3 gap-0.5">{g.images.map((src, i) => <img key={src} src={src} alt="" loading="lazy" className={`${i === 0 ? 'col-span-3 aspect-[16/9]' : 'aspect-square'} w-full object-cover`} />)}</div>

@@ -1,6 +1,7 @@
 /* Development seed: platform data + a fully populated demo store. Run: pnpm db:seed */
 import { PrismaClient } from '@prisma/client';
 import { hash } from '@node-rs/argon2';
+import { seedDemoAccounts } from '../src/seed/demo-accounts';
 import { seedPlatform } from '../src/seed/platform';
 import { DEFAULT_STORE_ROLES } from '../src/tenancy/permissions';
 
@@ -14,6 +15,7 @@ async function main() {
   const { community } = await seedPlatform(prisma, { adminEmail: process.env.ADMIN_EMAIL?.toLowerCase() ?? 'admin@can.local', adminPassword: process.env.ADMIN_PASSWORD ?? DEMO_PASSWORD });
   if (await prisma.store.findUnique({ where: { slug: 'techworld' } })) {
     console.log('Demo data already present.');
+    await seedDemoAccounts(prisma);
     return;
   }
   const nadiad = await prisma.city.findFirstOrThrow({ where: { slug: 'nadiad' }, include: { areas: true } });
@@ -76,6 +78,7 @@ async function main() {
       ],
     });
   });
+  await seedDemoAccounts(prisma);
   console.log(`Seed complete.\n  Admin: admin@can.local / ${DEMO_PASSWORD}\n  Store owner: owner@techworld.local / ${DEMO_PASSWORD}\n  Store website: http://techworld.mcvc.localhost:3000`);
 }
 

@@ -23,5 +23,5 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       .catch(() => router.replace('/login?next=/admin'));
   }, [router]);
   if (!me) return <div className="p-6 lg:pl-72"><Skeleton className="h-96" /></div>;
-  return <Shell mark={<CanMark className="h-8 w-auto" />} brand="CAN" brandSub="Community master admin" nav={NAV} user={{ name: me.name, role: label(me.platformRole!) }}>{children}</Shell>;
+  return <Shell mark={<CanMark className="h-8 w-auto" />} brand="CAN" brandSub="Community master admin" nav={NAV} tabs={[{ label: 'Overview', href: '/admin', icon: 'home' }, { label: 'Approvals', href: '/admin/applications', icon: 'file' }, { label: 'Stores', href: '/admin/stores', icon: 'store' }, { label: 'Cities', href: '/admin/cities', icon: 'map' }]} user={{ name: me.name, role: label(me.platformRole!) }}>{children}</Shell>;
 }

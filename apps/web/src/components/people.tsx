@@ -48,7 +48,7 @@ export function AdvisoryCommittee({ team }: { team: TeamMember[] }) {
   return (
     <>
       {past.length > 0 && (
-        <ol className="relative grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="relative grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {past.map((t, i) => (
             <Reveal as="li" key={t.name} delay={i * 80} className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-card">
               <Avatar src={t.photo} name={t.name} className="h-16 w-16" />
@@ -62,7 +62,7 @@ export function AdvisoryCommittee({ team }: { team: TeamMember[] }) {
         </ol>
       )}
       {others.length > 0 && (
-        <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {others.map((t) => (
             <li key={t.name} className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 ring-1 ring-slate-200">
               <Avatar src={t.photo} name={t.name} className="h-10 w-10" />
@@ -91,9 +91,9 @@ export function LeadersDirectory({ leaders, zones }: { leaders: Leader[]; zones:
   return (
     <div>
       <div className="flex flex-wrap items-center gap-2">
-        <div role="tablist" aria-label="Zone" className="flex flex-wrap gap-2">
+        <div role="tablist" aria-label="Zone" className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
           {zones.map((z) => (
-            <button key={z} role="tab" aria-selected={!q && zone === z} onClick={() => { setZone(z); setQ(''); }} className={cx('rounded-full px-4 py-1.5 text-sm font-medium ring-1 ring-inset transition', !q && zone === z ? 'bg-ink text-white ring-ink' : 'bg-white text-slate-700 ring-slate-200 hover:bg-slate-50')}>
+            <button key={z} role="tab" aria-selected={!q && zone === z} onClick={() => { setZone(z); setQ(''); }} className={cx('shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium ring-1 ring-inset transition active:scale-95', !q && zone === z ? 'bg-ink text-white ring-ink' : 'bg-white text-slate-700 ring-slate-200 hover:bg-slate-50')}>
               {z}
             </button>
           ))}
@@ -101,10 +101,10 @@ export function LeadersDirectory({ leaders, zones }: { leaders: Leader[]; zones:
         <label className="relative ml-auto w-full sm:w-64">
           <span className="sr-only">Search leaders</span>
           <Icon name="search" className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search name or association" className="h-9 w-full rounded-full border-0 pl-9 pr-3 text-sm ring-1 ring-slate-200 focus:ring-2 focus:ring-brand" />
+          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search name or association" className="h-10 w-full rounded-full border-0 pl-9 pr-3 text-base sm:h-9 sm:text-sm ring-1 ring-slate-200 focus:ring-2 focus:ring-brand" />
         </label>
       </div>
-      <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {shown.map((l) => (
           <li key={l.post + l.name + l.code} className="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-card">
             <Avatar src={l.photo} name={l.name} className="h-12 w-12" />

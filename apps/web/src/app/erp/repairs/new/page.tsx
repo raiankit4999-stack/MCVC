@@ -53,7 +53,7 @@ function Intake() {
     <form onSubmit={submit} className="max-w-4xl space-y-6">
       <PageHeader title="New job card" subtitle="Device intake — keep it quick; details can be added during diagnosis." actions={<Button disabled={busy}>{busy ? 'Saving…' : 'Create job card'}</Button>} />
       {error && <Alert>{error}</Alert>}
-      <Card title="Customer"><div className="grid gap-4 p-5 sm:grid-cols-3">
+      <Card title="Customer"><div className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-3">
         <Field label="Mobile"><Input name="phone" required inputMode="tel" defaultValue={prefill?.phone} autoFocus /></Field>
         <Field label="Name"><Input name="name" required defaultValue={prefill?.name} /></Field>
         <Field label="Email"><Input name="email" type="email" /></Field>
@@ -62,7 +62,7 @@ function Intake() {
         <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Device category">
           {CATEGORIES.map((c) => <button type="button" role="radio" aria-checked={category === c} key={c} onClick={() => setCategory(c)} className={cx('rounded-lg px-3 py-2 text-sm font-medium ring-1 ring-inset', category === c ? 'bg-brand text-white ring-brand' : 'ring-slate-200 hover:bg-slate-50')}>{c}</button>)}
         </div>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <Field label="Brand"><Input name="brand" required list="brands" /></Field>
           <Field label="Model"><Input name="model" required defaultValue={prefill?.model} /></Field>
           <Field label="Serial number"><Input name="serialNumber" /></Field>
@@ -78,7 +78,7 @@ function Intake() {
         </fieldset>
         <p className="rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">Do not record device passwords or PINs. Ask the customer to sign in during diagnosis if needed.</p>
       </div></Card>
-      <Card title="Assignment"><div className="grid gap-4 p-5 sm:grid-cols-3">
+      <Card title="Assignment"><div className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-3">
         <Field label="Technician"><Select name="technicianId"><option value="">Unassigned</option>{techs.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}</Select></Field>
         <Field label="Estimated delivery"><Input name="estimatedDelivery" type="date" /></Field>
         <Field label="Initial estimate ₹"><Input name="estimate" type="number" min={0} step="0.01" /></Field>

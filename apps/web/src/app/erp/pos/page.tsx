@@ -115,7 +115,7 @@ function Pos() {
           <option value="PROFORMA">Proforma invoice</option>
         </Select>
       } />
-      <div className="grid gap-6 xl:grid-cols-[1fr_380px]">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1fr_380px]">
         <div className="space-y-4">
           <Card className="p-4">
             <div className="relative">

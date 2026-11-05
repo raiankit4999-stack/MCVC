@@ -51,7 +51,7 @@ export default function Inventory() {
     <>
       <PageHeader title="Stock & purchases" />
       {inv.data && (
-        <div className="grid gap-4 sm:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
           <Stat icon="box" label="Products" value={inv.data.totals.products} />
           <Stat icon="layers" label="Units in stock" value={inv.data.totals.units} tone="violet" />
           <Stat icon="tag" label="Valuation at cost" value={money(inv.data.totals.valuationAtCost, true)} tone="green" />
@@ -59,9 +59,9 @@ export default function Inventory() {
         </div>
       )}
       {error && <div className="mt-4"><Alert>{error}</Alert></div>}
-      <div className="mt-6 grid gap-6 xl:grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
         <Card title="Receive purchase (GRN)">
-          <form onSubmit={purchase} className="grid gap-3 p-4 sm:grid-cols-2">
+          <form onSubmit={purchase} className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-2">
             <Field label="Supplier"><Select name="supplierId"><option value="">New supplier →</option>{suppliers.data?.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}</Select></Field>
             <Field label="New supplier name"><Input name="newSupplier" /></Field>
             <Field label="Product" className="sm:col-span-2"><Select name="productId" required>{productOptions}</Select></Field>
@@ -74,7 +74,7 @@ export default function Inventory() {
           </form>
         </Card>
         <Card title="Stock adjustment">
-          <form onSubmit={adjust} className="grid gap-3 p-4 sm:grid-cols-2">
+          <form onSubmit={adjust} className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-2">
             <Field label="Product" className="sm:col-span-2"><Select name="productId" required>{productOptions}</Select></Field>
             <Field label="Quantity (+/−)"><Input name="quantity" type="number" required /></Field>
             <Field label="Type"><Select name="type"><option value="ADJUSTMENT">Audit adjustment</option><option value="DAMAGED">Damaged</option></Select></Field>
@@ -83,7 +83,7 @@ export default function Inventory() {
           </form>
         </Card>
       </div>
-      <div className="mt-6 grid gap-6 xl:grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
         <Card title="Recent stock movements">
           <Table head={['When', 'Product', 'Movement', 'Qty']}>
             {mv.data?.map((m) => <tr key={m.id}><Td>{dateTime(m.createdAt)}</Td><Td>{m.product.name}</Td><Td><Badge tone={m.quantity > 0 ? 'green' : 'amber'}>{label(m.movementType)}</Badge></Td><Td className="font-medium">{m.quantity > 0 ? `+${m.quantity}` : m.quantity}</Td></tr>)}

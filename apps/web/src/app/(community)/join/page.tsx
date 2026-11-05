@@ -69,7 +69,7 @@ function RegisterForm({ onDone }: { onDone: () => void }) {
   }
   return (
     <Card className="p-6">
-      <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
+      <form onSubmit={submit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {error && <div className="sm:col-span-2"><Alert>{error}</Alert></div>}
         <Field label="Owner name"><Input name="name" required minLength={2} /></Field>
         <Field label="Mobile number"><Input name="phone" required inputMode="tel" placeholder="98250 12345" /></Field>
@@ -138,7 +138,7 @@ function ApplicationForm({ onDone, defaults }: { onDone: () => void; defaults: {
     <form onSubmit={submit} className="space-y-6">
       {error && <Alert>{error}</Alert>}
       <Card title="Business details" className="p-0">
-        <div className="grid gap-4 p-5 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-2">
           <Field label="Business name"><Input name="businessName" required /></Field>
           <Field label="Owner name"><Input name="ownerName" defaultValue={defaults.name} required /></Field>
           <Field label="Business phone"><Input name="phone" required inputMode="tel" /></Field>
@@ -166,7 +166,7 @@ function ApplicationForm({ onDone, defaults }: { onDone: () => void; defaults: {
         </div>
       </Card>
       <Card title="What does your business offer?">
-        <div className="grid gap-6 p-5 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 p-5 sm:grid-cols-2">
           {(['PRODUCT', 'SERVICE'] as const).map((k) => (
             <fieldset key={k}>
               <legend className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">{k === 'PRODUCT' ? 'Products' : 'Services'}</legend>
@@ -185,7 +185,7 @@ function ApplicationForm({ onDone, defaults }: { onDone: () => void; defaults: {
         </div>
       </Card>
       <Card title="Membership plan">
-        <div className="grid gap-3 p-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 p-5 sm:grid-cols-2 lg:grid-cols-4">
           {plans.map((p) => (
             <button type="button" key={p.id} onClick={() => setPlan(p.id)} className={`rounded-xl p-4 text-left ring-1 ring-inset transition ${plan === p.id ? 'bg-brand-50 ring-2 ring-brand' : 'ring-slate-200 hover:bg-slate-50'}`} aria-pressed={plan === p.id}>
               <p className="font-semibold text-ink">{p.name}</p>

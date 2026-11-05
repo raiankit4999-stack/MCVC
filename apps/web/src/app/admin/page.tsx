@@ -31,14 +31,14 @@ export default function AdminHome() {
     <>
       <PageHeader title="Community master dashboard" subtitle="Network-wide overview. Store-level customer and financial records are not shown here." />
       {!d.data ? <Skeleton className="h-24" /> : (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <Stat icon="store" label={`Total stores · ${d.data.stores.suspended} suspended`} value={d.data.stores.total} />
           <Stat icon="check" label="Active memberships" value={d.data.activeMemberships} tone="green" />
           <Stat icon="clock" label="Pending approval" value={d.data.pendingApprovals} tone="amber" />
           <Stat icon="tag" label="Subscription MRR" value={compactInr(d.data.monthlyRecurringRevenue)} tone="violet" />
         </div>
       )}
-      <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_1fr_320px]">
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[1fr_1fr_320px]">
         <Card title="Stores by city"><div className="p-5">{d.data && <HBars rows={d.data.byCity.map((c) => ({ label: c.name ?? '—', value: c.count }))} />}</div></Card>
         <Card title="Network activity (all time)">
           {d.data && (

@@ -45,10 +45,10 @@ export default function Settings() {
           ? <Button variant="secondary" onClick={() => run(() => apiFetch('/store/website/unpublish', { method: 'POST' }), 'Website unpublished')}>Unpublish</Button>
           : <Button onClick={() => run(() => apiFetch('/store/website/publish', { method: 'POST' }), 'Website published')}>Publish website</Button>)
       } />
-      <div className="grid gap-6 xl:grid-cols-[1fr_420px]">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1fr_420px]">
         <form onSubmit={save} className="space-y-6">
           {error && <Alert>{error}</Alert>}
-          <Card title="Brand"><div className="grid gap-4 p-5 sm:grid-cols-2">
+          <Card title="Brand"><div className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-2">
             <Field label="Tagline"><Input name="tagline" defaultValue={s.tagline ?? ''} /></Field>
             <Field label="Homepage headline"><Input name="heroHeadline" defaultValue={s.heroHeadline ?? ''} /></Field>
             <Field label="Logo URL"><Input name="logoUrl" type="url" defaultValue={s.logoUrl ?? ''} /></Field>
@@ -62,9 +62,9 @@ export default function Settings() {
           </div></Card>
           <Card title="Business hours"><div className="space-y-2 p-5">
             {DAYS.map((d, i) => (
-              <div key={d} className="flex items-center gap-3 text-sm">
-                <label className="flex w-20 items-center gap-2"><input type="checkbox" checked={!!hours[i]} onChange={(e) => setHours(hours.map((h, j) => (j === i ? (e.target.checked ? { day: i, open: '10:00', close: '20:00' } : null) : h)))} /> {d}</label>
-                {hours[i] ? <><Input type="time" value={hours[i]!.open} onChange={(e) => setHours(hours.map((h, j) => (j === i ? { ...h!, open: e.target.value } : h)))} className="w-32" /> – <Input type="time" value={hours[i]!.close} onChange={(e) => setHours(hours.map((h, j) => (j === i ? { ...h!, close: e.target.value } : h)))} className="w-32" /></> : <span className="text-slate-400">Closed</span>}
+              <div key={d} className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                <label className="flex w-16 items-center gap-2"><input type="checkbox" checked={!!hours[i]} onChange={(e) => setHours(hours.map((h, j) => (j === i ? (e.target.checked ? { day: i, open: '10:00', close: '20:00' } : null) : h)))} /> {d}</label>
+                {hours[i] ? <><Input type="time" value={hours[i]!.open} onChange={(e) => setHours(hours.map((h, j) => (j === i ? { ...h!, open: e.target.value } : h)))} className="w-[7.5rem] sm:w-32" /> – <Input type="time" value={hours[i]!.close} onChange={(e) => setHours(hours.map((h, j) => (j === i ? { ...h!, close: e.target.value } : h)))} className="w-[7.5rem] sm:w-32" /></> : <span className="text-slate-400">Closed</span>}
               </div>
             ))}
           </div></Card>

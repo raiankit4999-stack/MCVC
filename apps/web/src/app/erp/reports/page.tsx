@@ -22,7 +22,7 @@ export default function Reports() {
     <>
       <PageHeader title="Reports" actions={<div className="flex gap-2"><Field label="From"><Input type="date" value={from} onChange={(e) => setFrom(e.target.value)} /></Field><Field label="To"><Input type="date" value={to} onChange={(e) => setTo(e.target.value)} /></Field></div>} />
       {pl.data && (
-        <div className="grid gap-4 sm:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
           <Stat icon="chart" label="Revenue (taxable)" value={money(pl.data.revenue, true)} />
           <Stat icon="box" label="Cost of goods sold" value={money(pl.data.costOfGoodsSold, true)} tone="amber" />
           <Stat icon="wrench" label="Repair parts consumed" value={money(pl.data.repairPartsConsumed, true)} tone="violet" />
@@ -30,7 +30,7 @@ export default function Reports() {
         </div>
       )}
       <Card title="Daily sales" className="mt-6"><div className="p-4">{sales.data && <SalesArea data={sales.data.daily} />}</div></Card>
-      <div className="mt-6 grid gap-6 xl:grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
         <Card title="Sales by product">
           <Table head={['Item', 'Qty', 'Revenue']}>{sales.data?.byProduct.map((r) => <tr key={r.name}><Td className="max-w-xs truncate">{r.name}</Td><Td>{r.quantity}</Td><Td>{money(r.revenue)}</Td></tr>)}</Table>
         </Card>

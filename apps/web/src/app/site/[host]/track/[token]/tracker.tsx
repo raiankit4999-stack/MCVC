@@ -44,7 +44,7 @@ export function Tracker({ host, token, initial }: { host: string; token: string;
         </div>
       )}
 
-      <dl className="mt-8 grid gap-4 rounded-2xl bg-slate-50 p-6 text-sm sm:grid-cols-2">
+      <dl className="mt-8 grid grid-cols-1 gap-4 rounded-2xl bg-slate-50 p-6 text-sm sm:grid-cols-2">
         <div><dt className="text-slate-500">Reported problem</dt><dd className="font-medium">{v.reportedProblem}</dd></div>
         {v.estimatedDelivery && <div><dt className="text-slate-500">Estimated completion</dt><dd className="font-medium">{new Date(v.estimatedDelivery).toLocaleDateString('en-IN', { dateStyle: 'medium' })}</dd></div>}
         {v.estimateAmount && <div><dt className="text-slate-500">Approved quotation</dt><dd className="font-medium">{money(v.estimateAmount)} · {label(v.approval)}</dd></div>}

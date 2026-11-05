@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { Icon } from '@/components/icons';
+import { MobileMenu } from '@/components/mobile-menu';
 import { FONTS, basePath, getStore, hostFrom } from './data';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -39,9 +40,9 @@ export default async function StoreSiteLayout({ children, params }: { children: 
       </div>
       <header className="sticky top-0 z-30 border-b border-slate-100 bg-white/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
-          <Link href={`${base}/`} className="flex items-center gap-2.5">
+          <Link href={`${base}/`} className="flex min-w-0 items-center gap-2.5">
             {b.logoUrl ? <img src={b.logoUrl} alt="" className="h-9 w-9 rounded-lg object-cover" /> : <span className="grid h-9 w-9 place-items-center rounded-lg text-white" style={{ background: 'var(--brand)' }}><Icon name="desktop" /></span>}
-            <span className="text-lg font-bold" style={{ color: 'var(--accent)' }}>{s.name}</span>
+            <span className="truncate text-base font-bold sm:text-lg" style={{ color: 'var(--accent)' }}>{s.name}</span>
           </Link>
           <nav className="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex">
             <Link href={`${base}/`} className="hover:text-[var(--brand)]">Home</Link>
@@ -50,12 +51,27 @@ export default async function StoreSiteLayout({ children, params }: { children: 
             <Link href={`${base}/#about`} className="hover:text-[var(--brand)]">About</Link>
             <Link href={`${base}/#contact`} className="hover:text-[var(--brand)]">Contact</Link>
           </nav>
-          <Link href={`${base}/book`} className="inline-flex h-10 items-center rounded-lg px-4 text-sm font-semibold text-white shadow-sm hover:opacity-90" style={{ background: 'var(--brand)' }}>Book a Service</Link>
+          <div className="flex items-center gap-1">
+            <Link href={`${base}/book`} className="hidden h-10 items-center whitespace-nowrap rounded-lg px-4 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-[.97] sm:inline-flex" style={{ background: 'var(--brand)' }}>Book a Service</Link>
+            <MobileMenu label={s.name} links={[['Home', `${base}/`], ['Products', `${base}/products`], ['Services & Repair', `${base}/services`], ['Book a service', `${base}/book`], ['About', `${base}/#about`], ['Contact', `${base}/#contact`]]} />
+          </div>
         </div>
       </header>
-      <main>{children}</main>
+      <main className="page-in pb-24 md:pb-0">{children}</main>
+      {/* Sticky actions on phones */}
+      <div className="pb-safe fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur md:hidden">
+        <div className="grid grid-cols-3 gap-2 p-2">
+          <a href={`tel:${s.phone}`} className="flex h-12 flex-col items-center justify-center rounded-xl text-xs font-semibold text-slate-800 ring-1 ring-slate-200 active:bg-slate-50"><Icon name="phone" className="h-5 w-5" />Call</a>
+          {b.whatsappNumber ? (
+            <a href={`https://wa.me/${b.whatsappNumber.replace('+', '')}`} className="flex h-12 flex-col items-center justify-center rounded-xl bg-[#25D366] text-xs font-semibold text-white active:opacity-90"><Icon name="whatsapp" className="h-5 w-5" />WhatsApp</a>
+          ) : (
+            <Link href={`${base}/products`} className="flex h-12 flex-col items-center justify-center rounded-xl text-xs font-semibold text-slate-800 ring-1 ring-slate-200 active:bg-slate-50"><Icon name="box" className="h-5 w-5" />Products</Link>
+          )}
+          <Link href={`${base}/book`} className="flex h-12 flex-col items-center justify-center rounded-xl text-xs font-semibold text-white active:opacity-90" style={{ background: 'var(--brand)' }}><Icon name="calendar" className="h-5 w-5" />Book</Link>
+        </div>
+      </div>
       <footer id="contact" className="mt-20 text-slate-300" style={{ background: '#1C1917' }}>
-        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-12 md:grid-cols-3">
+        <div className="mx-auto grid grid-cols-1 max-w-7xl gap-8 px-6 py-12 md:grid-cols-3">
           <div>
             <p className="text-lg font-bold text-white">{s.name}</p>
             <p className="mt-2 text-sm text-slate-400">{b.footerText ?? b.tagline}</p>

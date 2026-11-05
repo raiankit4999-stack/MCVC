@@ -52,7 +52,7 @@ export default function InvoiceView({ params }: { params: Promise<{ id: string }
   };
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[1fr_320px]">
+    <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1fr_320px]">
       <article className="rounded-2xl border border-slate-200 bg-white p-8 shadow-card print:border-0 print:p-0 print:shadow-none">
         <header className="flex flex-wrap justify-between gap-6 border-b border-slate-200 pb-6">
           <div>

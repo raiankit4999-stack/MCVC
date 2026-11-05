@@ -44,7 +44,7 @@ export default async function Home() {
   return (
     <>
       <section className="hero-bg relative overflow-hidden pb-24 text-white">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pt-14 sm:px-6 lg:grid-cols-[1.25fr_1fr] lg:pt-16">
+        <div className="mx-auto grid grid-cols-1 max-w-7xl items-center gap-10 px-4 pt-14 sm:px-6 lg:grid-cols-[1.25fr_1fr] lg:pt-16">
           <div>
             <span className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-orange-100 ring-1 ring-white/15">Computer Association Network · Gujarat</span>
             <h1 className="mt-5 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl">
@@ -115,7 +115,7 @@ export default async function Home() {
                 <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-brand"><span className="h-1.5 w-1.5 rounded-full bg-can-orange" />{zone}</h3>
                 {list.length > 3 && <Link href={`/associations?zone=${encodeURIComponent(zone)}`} className="text-xs font-semibold text-slate-500 hover:text-brand">+{list.length - 3} more</Link>}
               </div>
-              <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{list.slice(0, 3).map((a) => <AssociationCard key={a.slug} a={a} />)}</div>
+              <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">{list.slice(0, 3).map((a) => <AssociationCard key={a.slug} a={a} />)}</div>
             </div>
           ))}
         </div>
@@ -161,15 +161,15 @@ export default async function Home() {
           </div>
           <Link href="/stores" className="flex items-center gap-1 text-sm font-semibold text-brand">Store directory <Icon name="arrowRight" className="h-4 w-4" /></Link>
         </div>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{featured.map((s) => <StoreCard key={s.id} store={s} />)}</div>
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">{featured.map((s) => <StoreCard key={s.id} store={s} />)}</div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pt-16 sm:px-6">
-        <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.2fr_1fr]">
           <div className="overflow-hidden rounded-3xl bg-ink p-8 text-white sm:p-10">
             <h2 className="text-3xl font-bold tracking-tight">Why join CAN?</h2>
             <p className="mt-3 text-stone-300">Every member business gets its own branded website and domain, a complete computer-shop ERP and CRM, and discovery by customers across the network — your customers and data stay yours.</p>
-            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+            <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {([['globe', 'Branded website', 'Custom domain, products, bookings'], ['receipt', 'GST billing & POS', 'Invoices, payments, FY numbering'], ['wrench', 'Repair job cards', 'Intake, quotes, QR tracking'], ['box', 'Serial-level inventory', 'Stock ledger, purchases, warranty']] as [IconName, string, string][]).map(([icon, t, d]) => (
                 <li key={t} className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10"><Icon name={icon} className="h-6 w-6 text-can-amber" /><p className="mt-2 font-semibold">{t}</p><p className="text-sm text-stone-400">{d}</p></li>
               ))}

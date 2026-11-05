@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import type { ButtonHTMLAttributes, ComponentProps, ReactNode } from 'react';
+import { Children, cloneElement, isValidElement, type ButtonHTMLAttributes, type ComponentProps, type ReactElement, type ReactNode } from 'react';
 import { Icon, IconName } from './icons';
 
 export const cx = clsx;
@@ -18,7 +18,7 @@ export function Button({ variant = 'primary', size = 'md', className, ...p }: Bu
   return (
     <button
       className={cx(
-        'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+        'inline-flex touch-manipulation select-none items-center justify-center gap-2 rounded-lg font-medium transition active:scale-[.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
         size === 'sm' ? 'h-8 px-3 text-xs' : size === 'lg' ? 'h-12 px-6 text-base' : 'h-10 px-4 text-sm',
         variants[variant],
         className,
@@ -30,7 +30,7 @@ export function Button({ variant = 'primary', size = 'md', className, ...p }: Bu
 
 export function ButtonLink({ href, variant = 'primary', className, children }: { href: string; variant?: Variant; className?: string; children: ReactNode }) {
   return (
-    <Link href={href} className={cx('inline-flex h-10 items-center justify-center gap-2 rounded-lg px-4 text-sm font-medium transition', variants[variant], className)}>
+    <Link href={href} className={cx('inline-flex h-10 touch-manipulation items-center justify-center gap-2 rounded-lg px-4 text-sm font-medium transition active:scale-[.97]', variants[variant], className)}>
       {children}
     </Link>
   );
@@ -38,7 +38,7 @@ export function ButtonLink({ href, variant = 'primary', className, children }: {
 
 export function Card({ className, children, title, action }: { className?: string; children: ReactNode; title?: ReactNode; action?: ReactNode }) {
   return (
-    <section className={cx('rounded-2xl border border-slate-200/80 bg-white shadow-card', className)}>
+    <section className={cx('min-w-0 rounded-2xl border border-slate-200/80 bg-white shadow-card', className)}>
       {title && (
         <header className="flex items-center justify-between gap-3 border-b border-slate-100 px-5 py-3.5">
           <h2 className="text-sm font-semibold text-slate-900">{title}</h2>
@@ -61,9 +61,9 @@ export function Field({ label, hint, error, children, className }: { label: stri
   );
 }
 
-const control = 'block w-full rounded-lg border-0 bg-white px-3 text-sm text-slate-900 ring-1 ring-inset ring-slate-200 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-brand';
-export const Input = ({ className, ...p }: ComponentProps<'input'>) => <input className={cx(control, 'h-10', className)} {...p} />;
-export const Select = ({ className, ...p }: ComponentProps<'select'>) => <select className={cx(control, 'h-10 pr-8', className)} {...p} />;
+const control = 'block w-full rounded-lg border-0 bg-white px-3 text-base sm:text-sm text-slate-900 ring-1 ring-inset ring-slate-200 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-brand';
+export const Input = ({ className, ...p }: ComponentProps<'input'>) => <input className={cx(control, 'h-11 sm:h-10', className)} {...p} />;
+export const Select = ({ className, ...p }: ComponentProps<'select'>) => <select className={cx(control, 'h-11 pr-8 sm:h-10', className)} {...p} />;
 export const Textarea = ({ className, ...p }: ComponentProps<'textarea'>) => <textarea className={cx(control, 'py-2', className)} rows={3} {...p} />;
 
 const tones = {
@@ -135,10 +135,23 @@ export function Skeleton({ className }: { className?: string }) {
   return <div className={cx('animate-pulse rounded-lg bg-slate-200/70', className)} />;
 }
 
+/** Data table. Below 640px each row becomes a card; cells are labelled from the header. */
 export function Table({ head, children, className }: { head: ReactNode[]; children: ReactNode; className?: string }) {
+  const labels = head.map((h) => (typeof h === 'string' ? h : ''));
+  const rows = Children.map(children, (row) => {
+    if (!isValidElement(row)) return row;
+    const r = row as ReactElement<{ children?: ReactNode }>;
+    let i = 0;
+    const cells = Children.map(r.props.children, (cell) => {
+      if (!isValidElement(cell)) return cell;
+      const label = labels[i++] ?? '';
+      return cloneElement(cell as ReactElement<{ label?: string }>, { label });
+    });
+    return cloneElement(r, {}, cells);
+  });
   return (
-    <div className={cx('overflow-x-auto', className)}>
-      <table className="w-full min-w-[640px] text-left text-sm">
+    <div className={cx('sm:overflow-x-auto', className)}>
+      <table className="rtable w-full text-left text-sm sm:min-w-[640px]">
         <thead>
           <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-500">
             {head.map((h, i) => (
@@ -146,12 +159,12 @@ export function Table({ head, children, className }: { head: ReactNode[]; childr
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-100">{children}</tbody>
+        <tbody className="divide-y divide-slate-100">{rows}</tbody>
       </table>
     </div>
   );
 }
-export const Td = ({ children, className }: { children?: ReactNode; className?: string }) => <td className={cx('whitespace-nowrap px-5 py-3 text-slate-700', className)}>{children}</td>;
+export const Td = ({ children, className, label }: { children?: ReactNode; className?: string; label?: string }) => <td data-label={label || undefined} className={cx('whitespace-nowrap px-5 py-3 text-slate-700', className)}>{children}</td>;
 
 export function Alert({ tone = 'red', children }: { tone?: 'red' | 'green' | 'blue'; children: ReactNode }) {
   const t = { red: 'bg-red-50 text-red-800 ring-red-200', green: 'bg-green-50 text-green-800 ring-green-200', blue: 'bg-blue-50 text-blue-800 ring-blue-200' }[tone];

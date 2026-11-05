@@ -30,7 +30,7 @@ export default function Customers() {
       <PageHeader title="Customers" subtitle={data ? `${data.total} customers` : undefined} actions={<Button onClick={() => setShow(!show)}>Add customer</Button>} />
       {show && (
         <Card className="mb-6 p-4">
-          <form onSubmit={add} className="grid gap-3 sm:grid-cols-5 sm:items-end">
+          <form onSubmit={add} className="grid grid-cols-1 gap-3 sm:grid-cols-5 sm:items-end">
             {error && <div className="sm:col-span-5"><Alert>{error}</Alert></div>}
             <Field label="Name"><Input name="name" required /></Field>
             <Field label="Mobile"><Input name="phone" required /></Field>

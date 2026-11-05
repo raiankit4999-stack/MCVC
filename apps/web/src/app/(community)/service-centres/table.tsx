@@ -9,7 +9,7 @@ export function CentreTable({ rows }: { rows: Network['serviceCentres'] }) {
   return (
     <>
       <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search brand or city (e.g. Asus, Rajkot)" aria-label="Search service centres" className="h-11 w-full max-w-md rounded-xl border-0 px-4 text-sm ring-1 ring-slate-200 focus:ring-2 focus:ring-brand" />
-      <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         {shown.map((r, i) => (
           <article key={i} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
             <h2 className="font-semibold text-slate-900">{r.brand}</h2>

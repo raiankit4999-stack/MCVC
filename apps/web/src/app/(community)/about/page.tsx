@@ -26,7 +26,7 @@ export default async function About() {
 
       {p && (
         <div className="mx-auto max-w-5xl space-y-16 px-4 py-14 sm:px-6">
-          <section className="grid gap-8 lg:grid-cols-[1.3fr_1fr]">
+          <section className="grid grid-cols-1 gap-8 lg:grid-cols-[1.3fr_1fr]">
             <div>
               <h2 className="text-2xl font-bold text-ink">Our parent body: {p.shortName}</h2>
               <p className="mt-3 text-slate-700">
@@ -51,7 +51,7 @@ export default async function About() {
 
           <section>
             <h2 className="text-2xl font-bold text-ink">FITAG&apos;s Five Point Agenda</h2>
-            <ol className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            <ol className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {p.agenda.map((a, i) => (
                 <li key={a.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
                   <span className="grid h-9 w-9 place-items-center rounded-full bg-brand text-sm font-bold text-white">{i + 1}</span>
@@ -67,7 +67,7 @@ export default async function About() {
           {p.objectives && (
             <section>
               <h2 className="text-2xl font-bold text-ink">Objectives</h2>
-              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+              <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {p.objectives.map((o) => <li key={o} className="flex gap-3 rounded-xl bg-white p-4 text-sm text-slate-700 ring-1 ring-slate-200"><Icon name="check" className="h-5 w-5 shrink-0 text-can-orange" />{o}</li>)}
               </ul>
             </section>
@@ -86,7 +86,7 @@ export default async function About() {
             {advisory.length > 0 && (
               <>
                 <h3 className="mt-10 text-lg font-bold text-ink">Advisory committee</h3>
-                <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                <ul className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
                   {advisory.map((t) => (
                     <li key={t.name} className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 ring-1 ring-slate-200">
                       {t.photo ? <img src={t.photo} alt="" className="h-10 w-10 rounded-full object-cover object-top" /> : <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-50 text-xs font-bold text-brand-700">{t.name.replace(/^Mr\.\s*/, '').split(' ').map((w) => w[0]).join('').slice(0, 2)}</span>}
@@ -98,7 +98,7 @@ export default async function About() {
             )}
           </section>
 
-          <section className="grid gap-8 lg:grid-cols-2">
+          <section className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             <div>
               <h2 className="text-2xl font-bold text-ink">Useful links</h2>
               <div className="mt-4 space-y-4">

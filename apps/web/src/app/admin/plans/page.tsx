@@ -24,7 +24,7 @@ export default function Plans() {
     <>
       <PageHeader title="Membership plans" subtitle="Pricing is configuration — changes apply to new subscriptions and renewals." />
       {error && <div className="mb-4"><Alert>{error}</Alert></div>}
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         {data?.map((p) => (
           <Card key={p.id} className="p-5">
             <div className="flex items-center justify-between"><h2 className="font-semibold text-ink">{p.name}</h2><Badge>{p._count.subscriptions} stores</Badge></div>

@@ -27,7 +27,7 @@ export default function Services() {
   return (
     <>
       <PageHeader title="Service catalogue" subtitle="Services appear on your website and can be booked by customers." />
-      <div className="grid gap-6 xl:grid-cols-[1fr_380px]">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1fr_380px]">
         <Card>
           <Table head={['Service', 'Price', 'GST', 'SAC', 'Duration', '']}>
             {data?.map((s) => (
