@@ -217,16 +217,17 @@ model Store {
   updatedAt        DateTime         @updatedAt @db.Timestamptz(6)
   deletedAt        DateTime?        @db.Timestamptz(6)
 
-  community     Community       @relation(fields: [communityId], references: [id])
-  city          City            @relation(fields: [cityId], references: [id])
-  area          Area            @relation(fields: [areaId], references: [id])
-  association   Association?    @relation(fields: [associationId], references: [id])
+  community     Community           @relation(fields: [communityId], references: [id])
+  city          City                @relation(fields: [cityId], references: [id])
+  area          Area                @relation(fields: [areaId], references: [id])
+  association   Association?        @relation(fields: [associationId], references: [id])
   categories    StoreCategory[]
   domains       StoreDomain[]
   settings      StoreSettings?
   subscriptions Subscription[]
   members       StoreUser[]
   roles         StoreRole[]
+  brandServices StoreBrandService[]
 
   @@index([cityId, areaId, membershipStatus])
   @@index([associationId])
@@ -254,6 +255,29 @@ model StoreCategory {
 
   @@id([storeId, categoryId])
   @@map("store_categories")
+}
+
+/// A brand the store services, and on what footing. Declared by the store; verified by the community.
+model StoreBrandService {
+  id         String             @id @default(uuid()) @db.Uuid
+  storeId    String             @db.Uuid
+  brand      String
+  status     BrandServiceStatus
+  verified   Boolean            @default(false)
+  verifiedAt DateTime?          @db.Timestamptz(6)
+  createdAt  DateTime           @default(now()) @db.Timestamptz(6)
+
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@unique([storeId, brand])
+  @@index([brand, status])
+  @@map("store_brand_services")
+}
+
+enum BrandServiceStatus {
+  AUTHORISED // official authorised service centre of the brand
+  THIRD_PARTY // authorised through a distributor / service partner
+  UNAUTHORISED // independent repair, not authorised by the brand
 }
 
 model StoreDomain {

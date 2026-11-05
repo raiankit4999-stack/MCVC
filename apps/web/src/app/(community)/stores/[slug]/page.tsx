@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { BrandBadges, BrandLegend } from '@/components/brand-badges';
 import { Icon } from '@/components/icons';
 import { storeUrl } from '@/components/store-card';
 import { Badge } from '@/components/ui';
@@ -48,6 +49,13 @@ export default async function StoreProfile({ params }: { params: Promise<{ slug:
           )}
           <div className="mt-4 flex flex-wrap gap-1.5">{s.categories.map((c) => <Badge key={c.slug} tone={c.kind === 'SERVICE' ? 'slate' : 'orange'}>{c.name}</Badge>)}</div>
 
+          {s.brandServices?.length > 0 && (
+            <section className="mt-10">
+              <h2 className="text-lg font-semibold text-ink">Brands we service</h2>
+              <BrandBadges items={s.brandServices} size="md" className="mt-3" />
+              <details className="mt-3 text-sm text-slate-500"><summary className="cursor-pointer">What do these badges mean?</summary><BrandLegend className="mt-3" /></details>
+            </section>
+          )}
           {s.services.length > 0 && (
             <section className="mt-10">
               <h2 className="text-lg font-semibold text-ink">Services</h2>

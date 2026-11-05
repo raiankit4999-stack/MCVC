@@ -33,6 +33,23 @@ export class CommunityService {
     return ((c.settings ?? {}) as Record<string, unknown>).network ?? {};
   }
 
+  /** Member stores that service brands, with authorisation badges. */
+  async serviceCentres(q: { brand?: string; city?: string; status?: 'AUTHORISED' | 'THIRD_PARTY' | 'UNAUTHORISED' }) {
+    const c = await this.current();
+    const claim: Prisma.StoreBrandServiceWhereInput = { ...(q.brand ? { brand: q.brand } : {}), ...(q.status ? { status: q.status } : {}) };
+    const stores = await this.prisma.store.findMany({
+      where: { communityId: c.id, membershipStatus: 'ACTIVE', deletedAt: null, brandServices: { some: claim }, ...(q.city ? { city: { slug: q.city } } : {}) },
+      include: STORE_CARD_INCLUDE,
+      orderBy: [{ isVerified: 'desc' }, { name: 'asc' }],
+      take: 200,
+    });
+    const counts = await this.prisma.storeBrandService.groupBy({ by: ['brand'], where: { store: { communityId: c.id, membershipStatus: 'ACTIVE', deletedAt: null } }, _count: { _all: true } });
+    const rank = { AUTHORISED: 0, THIRD_PARTY: 1, UNAUTHORISED: 2 } as const;
+    const best = (st: (typeof stores)[number]) => Math.min(...st.brandServices.filter((b) => !q.brand || b.brand === q.brand).map((b) => rank[b.status] - (b.verified ? 0.5 : 0)));
+    stores.sort((a, b) => best(a) - best(b) || a.name.localeCompare(b.name));
+    return { items: stores.map(toStoreCard), brands: counts.map((b) => ({ brand: b.brand, stores: b._count._all })).sort((a, b) => b.stores - a.stores) };
+  }
+
   async associations(zone?: string) {
     const c = await this.current();
     const list = await this.prisma.association.findMany({
@@ -200,6 +217,7 @@ const STORE_CARD_INCLUDE = {
   categories: { include: { category: { select: { name: true, slug: true, kind: true } } } },
   domains: { where: { isPrimary: true, verificationStatus: 'VERIFIED' as const }, select: { hostname: true } },
   association: { select: { name: true, code: true, slug: true } },
+  brandServices: { select: { brand: true, status: true, verified: true }, orderBy: [{ status: 'asc' }, { brand: 'asc' }] },
 } satisfies Prisma.StoreInclude;
 
 type StoreWithCard = Prisma.StoreGetPayload<{ include: typeof STORE_CARD_INCLUDE }>;
@@ -225,5 +243,6 @@ function toStoreCard(s: StoreWithCard) {
     primaryDomain: s.domains[0]?.hostname ?? null,
     isOpen: isOpenNow(s.settings?.businessHours, s.timezone),
     association: s.association,
+    brandServices: s.brandServices,
   };
 }

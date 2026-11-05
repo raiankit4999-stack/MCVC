@@ -16,6 +16,7 @@ async function main() {
   if (await prisma.store.findUnique({ where: { slug: 'techworld' } })) {
     console.log('Demo data already present.');
     await seedDemoAccounts(prisma);
+    await seedDemoServiceCentres(community.id);
     return;
   }
   const nadiad = await prisma.city.findFirstOrThrow({ where: { slug: 'nadiad' }, include: { areas: true } });
@@ -79,7 +80,44 @@ async function main() {
     });
   });
   await seedDemoAccounts(prisma);
+  await seedDemoServiceCentres(community.id);
   console.log(`Seed complete.\n  Admin: admin@can.local / ${DEMO_PASSWORD}\n  Store owner: owner@techworld.local / ${DEMO_PASSWORD}\n  Store website: http://techworld.mcvc.localhost:3000`);
+}
+
+/**
+ * Demo service-centre data. Brand claims are created ONLY for fictional demo stores
+ * (never for real member listings): TechWorld plus two fictional stores.
+ */
+async function seedDemoServiceCentres(communityId: string) {
+  const demo: { slug: string; name: string; city: string; area: string; brands: [string, 'AUTHORISED' | 'THIRD_PARTY' | 'UNAUTHORISED', boolean][] }[] = [
+    { slug: 'techworld', name: 'TechWorld Computers', city: 'nadiad', area: 'college-road', brands: [['HP', 'AUTHORISED', true], ['Dell', 'THIRD_PARTY', true], ['Lenovo', 'THIRD_PARTY', false], ['ASUS', 'UNAUTHORISED', false], ['Acer', 'UNAUTHORISED', false]] },
+    { slug: 'demo-nexus-laptop-clinic', name: 'Nexus Laptop Clinic', city: 'anand', area: 'vallabh-vidyanagar', brands: [['Lenovo', 'AUTHORISED', true], ['ASUS', 'THIRD_PARTY', true], ['MSI', 'THIRD_PARTY', false], ['Apple', 'UNAUTHORISED', false], ['HP', 'UNAUTHORISED', false]] },
+    { slug: 'demo-printzone-services', name: 'PrintZone Services', city: 'vadodara', area: 'alkapuri', brands: [['Canon', 'AUTHORISED', true], ['Epson', 'AUTHORISED', true], ['Brother', 'THIRD_PARTY', false], ['HP', 'UNAUTHORISED', false]] },
+  ];
+  const cats = await prisma.businessCategory.findMany({ where: { communityId, slug: { in: ['laptop-repair', 'desktop-repair', 'printers-and-scanners', 'chip-level-motherboard-repair'] } } });
+  for (const d of demo) {
+    let store = await prisma.store.findUnique({ where: { slug: d.slug } });
+    if (!store) {
+      const city = await prisma.city.findFirst({ where: { slug: d.city }, include: { areas: true } });
+      if (!city) continue;
+      const area = city.areas.find((a) => a.slug === d.area) ?? city.areas[0];
+      store = await prisma.store.create({
+        data: {
+          communityId, cityId: city.id, areaId: area.id, name: d.name, slug: d.slug, stateCode: city.stateCode, phone: '+919000000000', email: `${d.slug}@demo.can`,
+          addressLine: `${area.name}, ${city.name}, Gujarat`, isVerified: true, websiteStatus: 'DRAFT',
+          categories: { create: cats.map((c) => ({ categoryId: c.id })) },
+          settings: { create: { tagline: 'Demo store — fictional business for the CAN demo', businessHours: [1, 2, 3, 4, 5, 6].map((day) => ({ day, open: '10:00', close: '19:30' })) } },
+        },
+      });
+    }
+    for (const [brand, status, verified] of d.brands) {
+      await prisma.storeBrandService.upsert({
+        where: { storeId_brand: { storeId: store.id, brand } },
+        create: { storeId: store.id, brand, status, verified, verifiedAt: verified ? new Date() : null },
+        update: {},
+      });
+    }
+  }
 }
 
 main()

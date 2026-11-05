@@ -1,4 +1,4 @@
-import { BadRequestException, Controller, Get, HttpCode, NotFoundException, Patch, Post } from '@nestjs/common';
+import { BadRequestException, Controller, Get, HttpCode, NotFoundException, Patch, Post, Put } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { z } from 'zod';
 import { CurrentStore, CurrentUser, StorePermission } from '../auth/decorators';
@@ -8,6 +8,7 @@ import { PrismaService } from '../common/prisma.service';
 import { TenantDb } from '../common/tenant-db.service';
 import { hexColor, indianPhone } from '../common/validators';
 import { ApiZodBody, ZBody } from '../common/zod';
+import { BRAND_STATUSES, SERVICE_BRANDS } from '../common/brands';
 
 const hhmm = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/);
 const url = z.url().max(500);
@@ -102,6 +103,39 @@ export class StoreController {
     const s = await this.prisma.store.update({ where: { id: ctx.id }, data: { websiteStatus: 'UNPUBLISHED' } });
     await this.audit.log({ tenantId: ctx.id, userId: user.id, action: 'website.unpublish', entityType: 'store', entityId: ctx.id });
     return { websiteStatus: s.websiteStatus };
+  }
+
+  @Get('brand-services')
+  @StorePermission('settings.manage')
+  async brandServices(@CurrentStore() ctx: StoreContext) {
+    const items = await this.prisma.storeBrandService.findMany({ where: { storeId: ctx.id }, orderBy: { brand: 'asc' } });
+    return { brands: SERVICE_BRANDS, items };
+  }
+
+  /** Replaces the store's brand list. Changing a claim's status clears its verification. */
+  @Put('brand-services')
+  @StorePermission('settings.manage')
+  async setBrandServices(
+    @CurrentStore() ctx: StoreContext,
+    @CurrentUser() user: AuthUser,
+    @ZBody(z.object({ items: z.array(z.object({ brand: z.enum(SERVICE_BRANDS), status: z.enum(BRAND_STATUSES) })).max(SERVICE_BRANDS.length) })) body: { items: { brand: string; status: (typeof BRAND_STATUSES)[number] }[] },
+  ) {
+    const existing = await this.prisma.storeBrandService.findMany({ where: { storeId: ctx.id } });
+    const wanted = new Map(body.items.map((i) => [i.brand, i.status]));
+    await this.prisma.$transaction([
+      this.prisma.storeBrandService.deleteMany({ where: { storeId: ctx.id, brand: { notIn: [...wanted.keys()] } } }),
+      ...[...wanted].map(([brand, status]) => {
+        const prev = existing.find((e) => e.brand === brand);
+        const keep = prev?.status === status;
+        return this.prisma.storeBrandService.upsert({
+          where: { storeId_brand: { storeId: ctx.id, brand } },
+          create: { storeId: ctx.id, brand, status },
+          update: { status, ...(keep ? {} : { verified: false, verifiedAt: null }) },
+        });
+      }),
+    ]);
+    await this.audit.log({ tenantId: ctx.id, userId: user.id, action: 'store.brand_services', entityType: 'store', entityId: ctx.id, metadata: { items: body.items } });
+    return this.brandServices(ctx);
   }
 
   @Get('roles')

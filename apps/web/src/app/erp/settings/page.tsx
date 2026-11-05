@@ -5,6 +5,7 @@ import { useToast } from '@/components/toast';
 import { Alert, Badge, Button, Card, Field, Input, PageHeader, Select, StatusBadge, Textarea } from '@/components/ui';
 import { apiFetch, errorText, useApi } from '@/lib/client-api';
 import { can, useStore } from '../context';
+import { BrandsCard } from './brands-card';
 
 interface Domains { platformHostname: string; cnameTarget: string; domains: { id: string; hostname: string; isPrimary: boolean; verificationStatus: string; instructions: { type: string; name: string; value: string; purpose: string }[] }[] }
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -83,6 +84,7 @@ export default function Settings() {
               <div className="px-4 py-8 text-white" style={{ background: `linear-gradient(120deg, #1C1917, ${color})` }}><p className="text-lg font-bold">{s.heroHeadline || store.name}</p><p className="text-sm opacity-80">{s.tagline}</p></div>
             </div>
           </Card>
+          {can(store, 'settings.manage') && <BrandsCard />}
           {domains.data && (
             <Card title="Domains">
               <div className="space-y-4 p-4 text-sm">

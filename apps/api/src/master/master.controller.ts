@@ -237,6 +237,7 @@ export class MasterController {
           city: { select: { name: true } },
           area: { select: { name: true } },
           association: { select: { code: true, name: true } },
+          brandServices: { orderBy: { brand: 'asc' } },
           subscriptions: { orderBy: { createdAt: 'desc' }, take: 1, include: { plan: { select: { name: true } } } },
           domains: { select: { hostname: true, verificationStatus: true, isPrimary: true } },
         },
@@ -256,6 +257,20 @@ export class MasterController {
     const { reason, ...data } = body;
     const updated = await this.prisma.store.update({ where: { id }, data });
     await this.audit.log({ tenantId: id, userId: user.id, action: 'store.status', entityType: 'store', entityId: id, metadata: { ...data, reason: reason ?? null }, ip: req.ip });
+    return updated;
+  }
+
+  @Patch('stores/:id/brand-services/:brand')
+  @PlatformRoles(...ALL_STAFF)
+  async verifyBrand(@CurrentUser() user: AuthUser, @Param('id', ParseUUIDPipe) id: string, @Param('brand') brand: string, @ZBody(z.object({ verified: z.boolean() })) body: { verified: boolean }) {
+    const scope = await this.scopes.forUser(user);
+    const store = await this.prisma.store.findFirst({ where: { id, deletedAt: null } });
+    if (!store) throw new NotFoundException('Store not found');
+    this.scopes.assertCovers(scope, store.cityId, store.areaId);
+    const claim = await this.prisma.storeBrandService.findUnique({ where: { storeId_brand: { storeId: id, brand } } });
+    if (!claim) throw new NotFoundException('This store has not declared that brand');
+    const updated = await this.prisma.storeBrandService.update({ where: { id: claim.id }, data: { verified: body.verified, verifiedAt: body.verified ? new Date() : null } });
+    await this.audit.log({ tenantId: id, userId: user.id, action: body.verified ? 'brand.verify' : 'brand.unverify', entityType: 'store_brand_service', entityId: claim.id, metadata: { brand, status: claim.status } });
     return updated;
   }
 

@@ -57,6 +57,11 @@ export class CommunityController {
     return this.community.network();
   }
 
+  @Get('service-centres')
+  serviceCentres(@ZQuery(z.object({ brand: z.string().max(40).optional(), city: z.string().max(80).optional(), status: z.enum(['AUTHORISED', 'THIRD_PARTY', 'UNAUTHORISED']).optional() })) q: { brand?: string; city?: string; status?: 'AUTHORISED' | 'THIRD_PARTY' | 'UNAUTHORISED' }) {
+    return this.community.serviceCentres(q);
+  }
+
   @Get('associations')
   associations(@ZQuery(z.object({ zone: z.string().max(40).optional() })) q: { zone?: string }) {
     return this.community.associations(q.zone);

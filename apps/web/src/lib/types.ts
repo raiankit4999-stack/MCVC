@@ -18,7 +18,10 @@ export interface StoreCard {
   primaryDomain: string | null;
   isOpen: boolean | null;
   association: { name: string; code: string | null; slug: string } | null;
+  brandServices: BrandService[];
 }
+export type BrandStatus = 'AUTHORISED' | 'THIRD_PARTY' | 'UNAUTHORISED';
+export interface BrandService { brand: string; status: BrandStatus; verified: boolean }
 export interface City { id: string; name: string; slug: string; state: string; storeCount: number; zone: string | null; associationName: string | null; associationCode: string | null }
 export interface Area { id: string; name: string; slug: string; cityId: string; city: { slug: string; name: string } }
 export interface Category { id: string; name: string; slug: string; kind: 'PRODUCT' | 'SERVICE' }
